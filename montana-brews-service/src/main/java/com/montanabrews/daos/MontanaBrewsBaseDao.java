@@ -5,11 +5,15 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public abstract class MontanaBrewsBaseDao <T extends Serializable> {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(MontanaBrewsBaseDao.class);
 
 	private Class<T> classy;
 	
@@ -36,6 +40,7 @@ public abstract class MontanaBrewsBaseDao <T extends Serializable> {
 	 * @return
 	 */
 	public T findOne(long id) {
+		LOG.info("Finding an instace of '{}' with id of '{}'", classy, id);
 		return (T) getCurrentSession().get(classy, id);
 	}
 	
@@ -44,6 +49,7 @@ public abstract class MontanaBrewsBaseDao <T extends Serializable> {
 	 * @return
 	 */
 	public List<T> findAll() {
+		LOG.info("Finding all instaces of '{}'", classy);
 		return getCurrentSession().createQuery("from " + classy.getName()).list();
 	}
 	
@@ -52,6 +58,7 @@ public abstract class MontanaBrewsBaseDao <T extends Serializable> {
 	 * @param entity
 	 */
 	public void create(T entity) {
+		LOG.info("Creating an instace of '{}' with given details '{}'", classy, entity);
 		getCurrentSession().persist(entity);
 	}
 	

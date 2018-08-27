@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.montanabrews.dtos.Beer;
+import com.montanabrews.dtos.BeerDto;
+import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
 
 @RestController
@@ -26,6 +27,11 @@ public class MicrobrewController {
 		Beer beer = new Beer();
 		beer.setBeerName("Some Name");
 		beerService.createMicroBrewRecord(beer);
+	}
+	
+	@RequestMapping(value="/insertbrew", method=RequestMethod.POST)
+	public void insertBrewRecord(BeerDto beerDto) {
+		beerService.insertBrew(beerDto);
 	}
 	
 }

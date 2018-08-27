@@ -1,16 +1,22 @@
 package com.montanabrews.services.impls;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.montanabrews.daos.BeerDao;
-import com.montanabrews.dtos.Beer;
+import com.montanabrews.dtos.BeerDto;
+import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
 
 @Component
 public class BeerServiceImpl implements BeerService {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(BeerServiceImpl.class);
 	
 	@Autowired
 	BeerDao beerDao;
@@ -23,6 +29,11 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public void createMicroBrewRecord(Beer beer) {
 		beerDao.createMicrobrewRecord(beer);
+	}
+
+	@Override
+	public void insertBrew(BeerDto beerDto) {
+		LOG.debug("Montana Brews :: inserting given record ('{}')", beerDto);
 	}
 
 }

@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.montanabrews.daos.BeerDao;
 import com.montanabrews.daos.MontanaBrewsBaseDao;
-import com.montanabrews.dtos.Beer;
+import com.montanabrews.entities.Beer;
 
 @Repository
 @Transactional
@@ -15,7 +15,8 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	
 	@Override
 	public List<Beer> retrieveListOfBeers() {
-		return findAll();
+		this.setClassy(Beer.class);
+		return this.findAll();
 	}
 
 	@Override

@@ -2,7 +2,7 @@ package com.montanabrews.daos;
 
 import java.util.List;
 
-import com.montanabrews.dtos.Beer;
+import com.montanabrews.entities.Beer;
 
 public interface BeerDao {
 	

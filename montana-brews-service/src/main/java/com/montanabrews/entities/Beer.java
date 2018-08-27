@@ -1,4 +1,4 @@
-package com.montanabrews.dtos;
+package com.montanabrews.entities;
 
 import java.io.Serializable;
 
