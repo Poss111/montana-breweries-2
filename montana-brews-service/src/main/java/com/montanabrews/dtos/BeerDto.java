@@ -1,5 +1,10 @@
 package com.montanabrews.dtos;
 
+/**
+ * @author Dan Poss
+ * This class is used to store the Microbrew 
+ * values coming from the endpoint.
+ */
 public class BeerDto {
 	
 	private String beerName;

@@ -1,8 +1,8 @@
 package com.montanabrews.services.impls;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import com.montanabrews.daos.BeerDao;
 import com.montanabrews.dtos.BeerDto;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
+import com.montanabrews.util.BeerDtoMapper;
 
 @Component
 public class BeerServiceImpl implements BeerService {
@@ -19,7 +20,7 @@ public class BeerServiceImpl implements BeerService {
 	private static final Logger LOG = LoggerFactory.getLogger(BeerServiceImpl.class);
 	
 	@Autowired
-	BeerDao beerDao;
+	private BeerDao beerDao;
 	
 	@Override
 	public List<Beer> returnAllMicrobrews() {

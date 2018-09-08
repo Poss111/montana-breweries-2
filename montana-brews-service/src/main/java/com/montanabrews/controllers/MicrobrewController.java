@@ -17,7 +17,7 @@ public class MicrobrewController {
 	@Autowired
 	BeerService beerService;
 	
-	@RequestMapping(value="/microbrewList", method=RequestMethod.POST)
+	@RequestMapping(value="/microbrewlist", method=RequestMethod.POST)
 	public List<Beer> returnListOfBeer() {
 		return beerService.returnAllMicrobrews();
 	}
