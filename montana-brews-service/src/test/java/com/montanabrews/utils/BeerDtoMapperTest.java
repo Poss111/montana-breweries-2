@@ -23,13 +23,21 @@ public class BeerDtoMapperTest {
 	BeerDtoMapper beerDtoMapper;
 	
 	@Test
-	public void test_mapper_BeerListToBeerListDtos() {
+	public void test_mapper_BeertoBeerDto() {
 		Beer beerOne = new Beer();
 		beerOne.setAbv(1);
 		beerOne.setBeerName("BeerNameOne");
 		beerOne.setBeerObjId(2);
 		BeerDto beerOneDto = beerDtoMapper.beerToBeerDto(beerOne);
 		assertTrue(!StringUtils.isBlank(beerOneDto.getBeerName()));
+	}
+	
+	@Test
+	public void test_mapper_BeerDtoToBeer() {
+		BeerDto beerDto = new BeerDto();
+		beerDto.setBeerName("BeerNameOne");
+		Beer beerOne = beerDtoMapper.beerDtoToBeer(beerDto);
+		assertTrue(!StringUtils.isBlank(beerOne.getBeerName()));
 	}
 
 }

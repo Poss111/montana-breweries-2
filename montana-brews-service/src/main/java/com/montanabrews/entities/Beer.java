@@ -3,8 +3,14 @@ package com.montanabrews.entities;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
 /**
@@ -18,6 +24,7 @@ public class Beer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue
 	private long beerObjId;
 	
 	private String beerName;
@@ -66,49 +73,19 @@ public class Beer implements Serializable {
 		this.abv = abv;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (abv ^ (abv >>> 32));
-		result = prime * result + ((beerName == null) ? 0 : beerName.hashCode());
-		result = prime * result + (int) (beerObjId ^ (beerObjId >>> 32));
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Beer other = (Beer) obj;
-		if (abv != other.abv)
-			return false;
-		if (beerName == null) {
-			if (other.beerName != null)
-				return false;
-		} else if (!beerName.equals(other.beerName))
-			return false;
-		if (beerObjId != other.beerObjId)
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj, "beerObjId");
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
-		return "Beer [beerObjId=" + beerObjId + ", beerName=" + beerName + ", abv=" + abv + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}	
 		
 }

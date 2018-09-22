@@ -22,6 +22,9 @@ public class BeerServiceImpl implements BeerService {
 	@Autowired
 	private BeerDao beerDao;
 	
+	@Autowired
+	private BeerDtoMapper beerMapper;
+	
 	@Override
 	public List<Beer> returnAllMicrobrews() {
 		return beerDao.retrieveListOfBeers();
@@ -35,6 +38,7 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public void insertBrew(BeerDto beerDto) {
 		LOG.debug("Montana Brews :: inserting given record ('{}')", beerDto);
+		beerDao.createMicrobrewRecord(beerMapper.beerDtoToBeer(beerDto));
 	}
 
 }

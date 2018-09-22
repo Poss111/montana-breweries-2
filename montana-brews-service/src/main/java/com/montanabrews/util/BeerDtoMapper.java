@@ -18,4 +18,8 @@ public class BeerDtoMapper {
 		return beerDto;
 	}
 	
+	public Beer beerDtoToBeer(BeerDto beerDto) {
+		return modelMapper.map(beerDto, Beer.class);
+	}
+	
 }
