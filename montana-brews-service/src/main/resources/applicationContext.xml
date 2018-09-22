@@ -31,5 +31,7 @@
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
 	<context:component-scan base-package="com.montanabrews.*"></context:component-scan>
+	
+	<bean name="modelMapper" class="org.modelmapper.ModelMapper"/>
 
 </beans>
