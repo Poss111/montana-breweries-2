@@ -24,7 +24,10 @@ public class MicrobrewController {
 	private BeerDtoMapper beerDtoMapper;
 
 	/**
-	 * @return
+	 * This method will return the full list of Microbrew records stored in the
+	 * Database - Daniel
+	 * 
+	 * @return A List of BeerDtos
 	 */
 	@RequestMapping(value = "/microbrewlist", method = RequestMethod.POST)
 	public List<BeerDto> returnListOfBeer() {
@@ -33,16 +36,9 @@ public class MicrobrewController {
 	}
 
 	/**
+	 * This method is to be used to insert a Microbrew Record into the Database
+	 * using the expected Json - Daniel
 	 * 
-	 */
-	@RequestMapping(value = "/createbeerrecord", method = RequestMethod.POST)
-	public void createABeerRecord() {
-		Beer beer = new Beer();
-		beer.setBeerName("Some Name");
-		beerService.createMicroBrewRecord(beer);
-	}
-
-	/**
 	 * @param beerDto
 	 */
 	@RequestMapping(value = "/insertbrew", method = RequestMethod.POST)
