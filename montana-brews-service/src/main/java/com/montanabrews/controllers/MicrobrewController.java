@@ -3,6 +3,8 @@ package com.montanabrews.controllers;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,8 @@ import com.montanabrews.util.BeerDtoMapper;
 @RestController
 public class MicrobrewController {
 
+	public static final Logger LOG = LoggerFactory.getLogger(MicrobrewController.class);	
+
 	@Autowired
 	private BeerService beerService;
 
@@ -30,7 +34,7 @@ public class MicrobrewController {
 	 * @return A List of BeerDtos
 	 */
 	@RequestMapping(value = "/microbrewlist", method = RequestMethod.POST)
-	public List<BeerDto> returnListOfBeer() {
+	public List<BeerDto> returnListOfBeer() throws Exception {
 		return beerService.returnAllMicrobrews().stream().map(record -> beerDtoMapper.beerToBeerDto(record))
 				.collect(Collectors.toList());
 	}
@@ -40,9 +44,11 @@ public class MicrobrewController {
 	 * using the expected Json - Daniel
 	 * 
 	 * @param beerDto
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/insertbrew", method = RequestMethod.POST)
-	public void insertBrewRecord(@RequestBody BeerDto beerDto) {
+	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
+		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
 	}
 

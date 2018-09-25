@@ -25,7 +25,7 @@ public class BeerDtoMapperTest {
 	@Test
 	public void test_mapper_BeertoBeerDto() {
 		Beer beerOne = new Beer();
-		beerOne.setAbv(1);
+		beerOne.setAbv(1F);
 		beerOne.setBeerName("BeerNameOne");
 		beerOne.setBeerObjId(2);
 		BeerDto beerOneDto = beerDtoMapper.beerToBeerDto(beerOne);

@@ -2,9 +2,9 @@ package com.montanabrews.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -25,23 +25,26 @@ public class Beer implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private long beerObjId;
+	@Column(name = "BEER_OBJ_ID")
+	private Integer beerObjId;
 	
+	@Column(name = "BEER_NAME")
 	private String beerName;
 	
-	private long abv;
+	@Column(name = "ABV")
+	private Float abv;
 	
 	/**
 	 * @return the beerObjId
 	 */
-	public long getBeerObjId() {
+	public Integer getBeerObjId() {
 		return beerObjId;
 	}
 	
 	/**
 	 * @param beerObjId the beerObjId to set
 	 */
-	public void setBeerObjId(long beerObjId) {
+	public void setBeerObjId(Integer beerObjId) {
 		this.beerObjId = beerObjId;
 	}
 	
@@ -62,14 +65,14 @@ public class Beer implements Serializable {
 	/**
 	 * @return the abv
 	 */
-	public long getAbv() {
+	public Float getAbv() {
 		return abv;
 	}
 	
 	/**
 	 * @param abv the abv to set
 	 */
-	public void setAbv(long abv) {
+	public void setAbv(Float abv) {
 		this.abv = abv;
 	}
 

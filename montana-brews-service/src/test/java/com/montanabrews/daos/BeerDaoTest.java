@@ -39,15 +39,15 @@ public class BeerDaoTest {
 	public void test_retrieveListOfBeers_validateThatMethodReturnsAListOfBeerEntities() {
 		List<Beer> expectedInsertedBeer = new ArrayList<>();
 		Beer beerOneToInsert = new Beer();
-		beerOneToInsert.setAbv(0);
+		beerOneToInsert.setAbv(0F);
 		beerOneToInsert.setBeerName("BeerOne");
 		expectedInsertedBeer.add(beerOneToInsert);		
 		Beer beerTwoToInsert = new Beer();
-		beerTwoToInsert.setAbv(0);
+		beerTwoToInsert.setAbv(0F);
 		beerTwoToInsert.setBeerName("BeerTwo");	
 		expectedInsertedBeer.add(beerTwoToInsert);		
 		Beer beerThreeToInsert = new Beer();
-		beerThreeToInsert.setAbv(0);
+		beerThreeToInsert.setAbv(0F);
 		beerThreeToInsert.setBeerName("BeerThree");
 		expectedInsertedBeer.add(beerThreeToInsert);	
 		beerDao.createMicrobrewRecord(beerOneToInsert);

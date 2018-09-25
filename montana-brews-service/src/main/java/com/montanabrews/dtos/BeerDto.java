@@ -1,5 +1,9 @@
 package com.montanabrews.dtos;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 /**
  * @author Dan Poss
  * This class is used to store the Microbrew 
@@ -7,7 +11,15 @@ package com.montanabrews.dtos;
  */
 public class BeerDto {
 	
+	/**
+	 * The name of the Microbrew to be returned to the User
+	 */
 	private String beerName;
+	
+	/**
+	 * The Alcohol By Volume of the Microbrew
+	 */
+	private String abv;
 
 	/**
 	 * @return the beerName
@@ -23,12 +35,26 @@ public class BeerDto {
 		this.beerName = beerName;
 	}
 
+	/**
+	 * @return the abv
+	 */
+	public String getAbv() {
+		return abv;
+	}
+
+	/**
+	 * @param abv the abv to set
+	 */
+	public void setAbv(String abv) {
+		this.abv = abv;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "BeerDto [beerName=" + beerName + "]";
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 	/* (non-Javadoc)
@@ -36,10 +62,7 @@ public class BeerDto {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((beerName == null) ? 0 : beerName.hashCode());
-		return result;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 	/* (non-Javadoc)
@@ -47,19 +70,7 @@ public class BeerDto {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BeerDto other = (BeerDto) obj;
-		if (beerName == null) {
-			if (other.beerName != null)
-				return false;
-		} else if (!beerName.equals(other.beerName))
-			return false;
-		return true;
+		return EqualsBuilder.reflectionEquals(this, obj);
 	}
 	
 }
