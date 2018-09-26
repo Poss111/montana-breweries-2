@@ -23,9 +23,9 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 			throws IOException, ServletException {
 		LOG.error("Access Denied due to :: " + accessDeniedExcpetion);
 		for (String headerName : Collections.list(servletRequest.getHeaderNames())) {
-			LOG.info("Header Name : " + headerName + " Header Value : " + servletRequest.getHeaders(headerName).nextElement());
+			LOG.debug("Header Name : " + headerName + " Header Value : " + servletRequest.getHeaders(headerName).nextElement());
 		}
-		servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Not Authorized");
+		servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Not Authorized to access API");
 	}
 
 }

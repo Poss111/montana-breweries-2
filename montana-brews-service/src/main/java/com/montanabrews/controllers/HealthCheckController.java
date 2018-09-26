@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.montanabrews.constants.MontanaBrewsAPIConstants;
 import com.montanabrews.constants.MontanaBrewsCommonConstants;
 
 import io.swagger.annotations.ApiResponse;
@@ -23,7 +24,7 @@ public class HealthCheckController {
 	 * 
 	 * @return A simple String stating the service is running.
 	 */
-	@RequestMapping(value="/healthcheck", method=RequestMethod.GET)
+	@RequestMapping(value=MontanaBrewsAPIConstants.HEALTHCHECK_API, method=RequestMethod.GET)
 	@ApiResponses(value = {
 			@ApiResponse(code = HttpStatus.SC_OK, message = MontanaBrewsCommonConstants.MONTANA_BREWS_SERVICE_OK)
 	})

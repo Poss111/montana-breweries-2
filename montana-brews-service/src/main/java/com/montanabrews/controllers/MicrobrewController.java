@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.montanabrews.constants.MontanaBrewsAPIConstants;
 import com.montanabrews.dtos.BeerDto;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
@@ -33,7 +34,7 @@ public class MicrobrewController {
 	 * 
 	 * @return A List of BeerDtos
 	 */
-	@RequestMapping(value = "/microbrewlist", method = RequestMethod.POST)
+	@RequestMapping(value = MontanaBrewsAPIConstants.MICROBREWLIST_API, method = RequestMethod.POST)
 	public List<BeerDto> returnListOfBeer() throws Exception {
 		return beerService.returnAllMicrobrews().stream().map(record -> beerDtoMapper.beerToBeerDto(record))
 				.collect(Collectors.toList());
@@ -46,7 +47,7 @@ public class MicrobrewController {
 	 * @param beerDto
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/private/insertbrew", method = RequestMethod.POST)
+	@RequestMapping(value = MontanaBrewsAPIConstants.INSERTBREW_API, method = RequestMethod.POST)
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);

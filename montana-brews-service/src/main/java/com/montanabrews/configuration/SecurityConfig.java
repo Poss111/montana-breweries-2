@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.montanabrews.authentication.CustomAccessDeniedHandler;
 import com.montanabrews.authentication.RestAuthenticationEntryPoint;
+import com.montanabrews.constants.MontanaBrewsAPIConstants;
 
 @EnableWebSecurity
 @Configuration
@@ -28,22 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private CustomAccessDeniedHandler customAccessDeniedHandler;
 
-//	@Override
-//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//		LOG.info("hit Auth configure");
-//		UserBuilder user = User.withDefaultPasswordEncoder();
-//		user.username("temp");
-//		user.password("temp");
-//		user.roles("WRITE");
-//		UserDetails userd = user.build();
-//		LOG.info(userd.getUsername() + " " + userd.getPassword());
-//		auth.inMemoryAuthentication().withUser(user.build());
-//	}
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		LOG.info("hit auth http configure");
-		http.antMatcher("/private/**").authorizeRequests().anyRequest().authenticated().and().sessionManagement()
+		http.antMatcher(MontanaBrewsAPIConstants.PRIVATE_API_FILTER).authorizeRequests().anyRequest().authenticated().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic().and().exceptionHandling()
 				.authenticationEntryPoint(restAuthenticationEntryPoint).accessDeniedHandler(customAccessDeniedHandler)
 				.and().csrf().disable();
