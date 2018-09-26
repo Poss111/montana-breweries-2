@@ -46,7 +46,7 @@ public class MicrobrewController {
 	 * @param beerDto
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/insertbrew", method = RequestMethod.POST)
+	@RequestMapping(value = "/private/insertbrew", method = RequestMethod.POST)
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
