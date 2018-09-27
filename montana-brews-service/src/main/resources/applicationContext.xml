@@ -10,7 +10,6 @@
 	<context:property-placeholder location="classpath:application.properties" />
 
 	<import resource="classpath:data-source.xml" />
-<!-- 	<import resource="classpath:spring-security.xml"/> -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
