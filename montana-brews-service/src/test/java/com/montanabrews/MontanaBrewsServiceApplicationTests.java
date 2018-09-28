@@ -1,5 +1,7 @@
 package com.montanabrews;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +13,8 @@ public class MontanaBrewsServiceApplicationTests {
 
 	@Test
 	public void contextLoads() {
+		MontanaBrewsServiceApplication.main(new String[] {});
+		assertTrue(true);
 	}
 
 }

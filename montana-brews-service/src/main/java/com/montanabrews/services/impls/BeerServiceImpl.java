@@ -2,7 +2,6 @@ package com.montanabrews.services.impls;
 
 import java.util.List;
 
-import org.mapstruct.factory.Mappers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +27,6 @@ public class BeerServiceImpl implements BeerService {
 	@Override
 	public List<Beer> returnAllMicrobrews() {
 		return beerDao.retrieveListOfBeers();
-	}
-
-	@Override
-	public void createMicroBrewRecord(Beer beer) {
-		beerDao.createMicrobrewRecord(beer);
 	}
 
 	@Override

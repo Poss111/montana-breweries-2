@@ -9,8 +9,6 @@ public interface BeerService {
 
 	public List<Beer> returnAllMicrobrews();
 
-	public void createMicroBrewRecord(Beer beer);
-
 	public void insertBrew(BeerDto beerDto);
 	
 }

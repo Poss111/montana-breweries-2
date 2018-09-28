@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.montanabrews.constants.MontanaBrewsAPIConstants;
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
@@ -20,7 +22,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		LOG.error("Exception caught from Controller '{}' from request '{}'", ex.getMessage(), request);
 		LOG.error("Exeption Stacktrace :: ", ex);
 
-		return handleExceptionInternal(ex, "Someting went wrong...", new HttpHeaders(),
+		return handleExceptionInternal(ex, MontanaBrewsAPIConstants.SOMETING_WENT_WRONG, new HttpHeaders(),
 				HttpStatus.INTERNAL_SERVER_ERROR, request);
 	}
 	

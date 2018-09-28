@@ -22,4 +22,6 @@ public class MontanaBrewsAPIConstants {
 	 */
 	public static final String PRIVATE_API_FILTER = "/private/**";
 
+	public static final String SOMETING_WENT_WRONG = "Someting went wrong...";
+
 }

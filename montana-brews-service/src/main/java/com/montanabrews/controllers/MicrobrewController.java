@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.montanabrews.constants.MontanaBrewsAPIConstants;
 import com.montanabrews.dtos.BeerDto;
-import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
 import com.montanabrews.util.BeerDtoMapper;
 
