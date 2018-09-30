@@ -20,6 +20,9 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 	@Override
 	public void commence(HttpServletRequest servletRequest, HttpServletResponse servletResponse, AuthenticationException exception)
 			throws IOException, ServletException {
+		LOG.info("Request :: " + servletRequest.getAuthType());
+		LOG.info("Request :: " + servletRequest.getHeader("Authorization"));
+		LOG.info("Exception :: " + exception);
 		LOG.error("Invalid access attempt to Application...");
 		servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Not Authorized");
 	}
