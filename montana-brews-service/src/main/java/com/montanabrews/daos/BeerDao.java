@@ -4,10 +4,14 @@ import java.util.List;
 
 import com.montanabrews.entities.Beer;
 
+/**
+ * @author Dan Poss
+ *
+ */
 public interface BeerDao {
 	
 	public List<Beer> retrieveListOfBeers();
 	
-	public void createMicrobrewRecord(Beer beerRecord);
+	public void createMicrobrewRecord(Beer beer);
 
 }

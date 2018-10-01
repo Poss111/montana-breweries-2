@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.montanabrews.constants.MontanaBrewsAPIConstants;
 import com.montanabrews.dtos.BeerDto;
+import com.montanabrews.dtos.BreweryDto;
 import com.montanabrews.services.BeerService;
+import com.montanabrews.services.BreweryService;
 import com.montanabrews.util.BeerDtoMapper;
+import com.montanabrews.util.BreweryDtoMapper;
 
 @RestController
 public class MicrobrewController {
@@ -23,9 +26,15 @@ public class MicrobrewController {
 
 	@Autowired
 	private BeerService beerService;
+	
+	@Autowired
+	private BreweryService breweryService;
 
 	@Autowired
 	private BeerDtoMapper beerDtoMapper;
+	
+	@Autowired
+	private BreweryDtoMapper breweryDtoMapper;
 
 	/**
 	 * This method will return the full list of Microbrew records stored in the
@@ -50,6 +59,12 @@ public class MicrobrewController {
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
+	}
+	
+	@RequestMapping(value = MontanaBrewsAPIConstants.INSERT_BREWERY_API, method = RequestMethod.POST)
+	public void insertBreweryRecord(@RequestBody BreweryDto breweryDto) throws Exception {
+		LOG.info("Record to insert into Database from Controller :: {}", breweryDto);
+		breweryService.insertBrewery(breweryDtoMapper.breweryDtoToBrewery(breweryDto));
 	}
 
 }

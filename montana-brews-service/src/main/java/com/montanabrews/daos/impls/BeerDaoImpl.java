@@ -20,9 +20,9 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	}
 
 	@Override
-	public void createMicrobrewRecord(Beer beerRecord) {
+	public void createMicrobrewRecord(Beer beer) {
 		this.setClassy(Beer.class);
-		create(beerRecord);
+		create(beer);
 	}
 
 }

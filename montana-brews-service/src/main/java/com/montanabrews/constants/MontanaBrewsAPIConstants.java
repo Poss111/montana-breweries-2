@@ -22,6 +22,14 @@ public class MontanaBrewsAPIConstants {
 	 */
 	public static final String PRIVATE_API_FILTER = "/private/**";
 
+	/**
+	 * The Error statement to print out if there is an issue
+	 */
 	public static final String SOMETING_WENT_WRONG = "Someting went wrong...";
+
+	/**
+	 * The API Url for inserting a brewery record into the Database
+	 */
+	public static final String INSERT_BREWERY_API = "/private/insertbrewery";
 
 }

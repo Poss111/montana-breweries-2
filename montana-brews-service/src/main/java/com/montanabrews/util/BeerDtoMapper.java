@@ -16,8 +16,7 @@ public class BeerDtoMapper {
 	ModelMapper modelMapper;
 
 	public BeerDto beerToBeerDto(Beer beer) {
-		BeerDto beerDto = modelMapper.map(beer, BeerDto.class);
-		return beerDto;
+		return modelMapper.map(beer, BeerDto.class);
 	}
 	
 	public Beer beerDtoToBeer(BeerDto beerDto) {
