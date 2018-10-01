@@ -22,17 +22,17 @@ import com.montanabrews.util.BreweryDtoMapper;
 @RestController
 public class MicrobrewController {
 
-	public static final Logger LOG = LoggerFactory.getLogger(MicrobrewController.class);	
+	public static final Logger LOG = LoggerFactory.getLogger(MicrobrewController.class);
 
 	@Autowired
 	private BeerService beerService;
-	
+
 	@Autowired
 	private BreweryService breweryService;
 
 	@Autowired
 	private BeerDtoMapper beerDtoMapper;
-	
+
 	@Autowired
 	private BreweryDtoMapper breweryDtoMapper;
 
@@ -42,7 +42,7 @@ public class MicrobrewController {
 	 * 
 	 * @return A List of BeerDtos
 	 */
-	@RequestMapping(value = MontanaBrewsAPIConstants.MICROBREWLIST_API, method = RequestMethod.POST)
+	@RequestMapping(value = MontanaBrewsAPIConstants.MICROBREW_LIST_API, method = RequestMethod.POST)
 	public List<BeerDto> returnListOfBeer() throws Exception {
 		return beerService.returnAllMicrobrews().stream().map(record -> beerDtoMapper.beerToBeerDto(record))
 				.collect(Collectors.toList());
@@ -53,18 +53,39 @@ public class MicrobrewController {
 	 * using the expected Json - Daniel
 	 * 
 	 * @param beerDto
-	 * @throws Exception 
+	 * @throws Exception
 	 */
-	@RequestMapping(value = MontanaBrewsAPIConstants.INSERTBREW_API, method = RequestMethod.POST)
+	@RequestMapping(value = MontanaBrewsAPIConstants.INSERT_BREW_API, method = RequestMethod.POST)
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
 	}
-	
+
+	/**
+	 * This method is to be used to insert a Brewery Record into the Database using
+	 * the epxected Json - Daniel
+	 * 
+	 * @param breweryDto
+	 * @throws Exception
+	 */
 	@RequestMapping(value = MontanaBrewsAPIConstants.INSERT_BREWERY_API, method = RequestMethod.POST)
 	public void insertBreweryRecord(@RequestBody BreweryDto breweryDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", breweryDto);
 		breweryService.insertBrewery(breweryDtoMapper.breweryDtoToBrewery(breweryDto));
+	}
+
+	/**
+	 * This method is to be used to list all Breweries available in the Database -
+	 * Daniel
+	 * 
+	 * @return List<BreweryDto>
+	 * @throws Exception
+	 */
+	@RequestMapping(value = MontanaBrewsAPIConstants.BREWERY_LIST_API, method = RequestMethod.POST)
+	public List<BreweryDto> listAllBreweries() throws Exception {
+		LOG.info("Request to list all Breweries available in Database.");
+		return breweryService.listAllBreweries().stream().map(record -> breweryDtoMapper.breweryToBreweryDto(record))
+				.collect(Collectors.toList());
 	}
 
 }
