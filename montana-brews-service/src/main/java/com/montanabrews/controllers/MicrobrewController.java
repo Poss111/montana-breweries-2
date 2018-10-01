@@ -71,7 +71,7 @@ public class MicrobrewController {
 	@RequestMapping(value = MontanaBrewsAPIConstants.INSERT_BREWERY_API, method = RequestMethod.POST)
 	public void insertBreweryRecord(@RequestBody BreweryDto breweryDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", breweryDto);
-		breweryService.insertBrewery(breweryDtoMapper.breweryDtoToBrewery(breweryDto));
+		breweryService.insertBrewery(breweryDto);
 	}
 
 	/**

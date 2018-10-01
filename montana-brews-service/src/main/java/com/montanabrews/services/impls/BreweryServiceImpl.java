@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.montanabrews.daos.BreweryDao;
+import com.montanabrews.dtos.BreweryDto;
 import com.montanabrews.entities.Brewery;
 import com.montanabrews.services.BreweryService;
+import com.montanabrews.util.BreweryDtoMapper;
 
 /**
  * @author Dan Poss
@@ -25,14 +27,18 @@ public class BreweryServiceImpl implements BreweryService {
 	
 	@Autowired
 	BreweryDao breweryDao;
+	
+	@Autowired
+	BreweryDtoMapper breweryDtoMapper;
 
 	/* (non-Javadoc)
 	 * @see com.montanabrews.services.BreweryService#insertBrewery(com.montanabrews.entities.Brewery)
 	 */
 	@Override
-	public void insertBrewery(Brewery brewery) {
-		LOG.info("Inserting following brewery record into Database :: ('{}')", brewery);
-		breweryDao.createBreweryRecord(brewery);
+	public void insertBrewery(BreweryDto breweryDto) {
+		Brewery breweryRecordToInsert = breweryDtoMapper.breweryDtoToBrewery(breweryDto);
+		LOG.info("Inserting following brewery record into Database :: ('{}')", breweryRecordToInsert);
+		breweryDao.createBreweryRecord(breweryRecordToInsert);
 	}
 
 	/* (non-Javadoc)
