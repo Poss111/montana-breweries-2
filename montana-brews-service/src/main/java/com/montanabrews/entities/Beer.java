@@ -4,8 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -24,7 +28,7 @@ public class Beer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "BEER_OBJ_ID", nullable = false)
 	private Integer beerObjId;
 	
@@ -33,6 +37,10 @@ public class Beer implements Serializable {
 	
 	@Column(name = "ABV")
 	private Float abv;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BREWERY_OBJ_ID")
+	private Brewery brewery;
 	
 	/**
 	 * @return the beerObjId

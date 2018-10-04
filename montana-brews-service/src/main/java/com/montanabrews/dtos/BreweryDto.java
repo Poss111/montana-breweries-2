@@ -3,12 +3,16 @@
  */
 package com.montanabrews.dtos;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.montanabrews.entities.Beer;
 
 /**
  * @author Dan Poss
@@ -23,6 +27,8 @@ public class BreweryDto {
 	
 	@Size(min=5,max=5, message="Zipcode should be 5 Digits")
 	private Integer zipcode;
+	
+	private List<BeerDto> microbrews;
 
 	/**
 	 * @return the breweryName
@@ -64,7 +70,21 @@ public class BreweryDto {
 	 */
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
-	}	
+	}		
+
+	/**
+	 * @return the microbrewList
+	 */
+	public List<BeerDto> getMicrobrews() {
+		return microbrews;
+	}
+
+	/**
+	 * @param microbrewList the microbrewList to set
+	 */
+	public void setMicrobrews(List<BeerDto> microbrews) {
+		this.microbrews = microbrews;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

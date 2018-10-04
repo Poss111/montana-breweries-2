@@ -35,7 +35,7 @@ public class BreweryDaoImpl extends MontanaBrewsBaseDao<Brewery> implements Brew
 	public void createBreweryRecord(Brewery brewery) {
 		setClassy(Brewery.class);
 		LOG.info("Creating a record of brewery :: ('{}')", brewery);
-		update(brewery);
+		create(brewery);
 	}
 
 }
