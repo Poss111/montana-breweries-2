@@ -42,7 +42,7 @@ public class Brewery implements Serializable {
 	@Column(name = "BREWERY_ZIPCODE")
 	private Integer zipcode;
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="BREWERY_OBJ_ID")
 	@OrderBy("beerName asc")
 	private List<Beer> microbrews;
