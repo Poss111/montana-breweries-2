@@ -1,0 +1,18 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div>
+  <p-table [value]="microbrews">
+    <ng-template pTemplate="header">
+      <tr>
+          <th>Name</th>
+          <th>ABV</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-microbrew>
+      <tr>
+          <td>{{microbrew.beerName}}</td>
+          <td>{{microbrew.abv}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
