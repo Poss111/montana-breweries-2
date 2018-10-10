@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,6 +39,13 @@ public class MicrobrewController {
 	@Autowired
 	private BreweryDtoMapper breweryDtoMapper;
 
+    private SimpMessagingTemplate template;
+    
+    @Autowired
+    public MicrobrewController(SimpMessagingTemplate template) {
+    	this.template = template;
+    }
+
 	/**
 	 * This method will return the full list of Microbrew records stored in the
 	 * Database - Daniel
@@ -59,6 +69,7 @@ public class MicrobrewController {
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
+		template.convertAndSend("/topic/hello", returnListOfBeer());
 	}
 
 	/**
