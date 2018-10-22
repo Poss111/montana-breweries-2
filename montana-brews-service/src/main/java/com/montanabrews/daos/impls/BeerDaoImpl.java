@@ -15,14 +15,30 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	
 	@Override
 	public List<Beer> retrieveListOfBeers() {
-		this.setClassy(Beer.class);
+		setClassy(Beer.class);
 		return this.findAll();
 	}
 
 	@Override
 	public void createMicrobrewRecord(Beer beer) {
-		this.setClassy(Beer.class);
+		setClassy(Beer.class);
 		create(beer);
+	}
+
+	@Override
+	public void createOrUpdateMicrobrewRecord(Beer beer) {
+		setClassy(Beer.class);
+		List<Beer> existingBeerRecords = findAll();
+		Beer foundBeer = existingBeerRecords
+		.stream()
+		.filter(record -> record.equals(beer))
+		.findFirst()
+		.orElse(beer);
+		update(existingBeerRecords
+				.stream()
+				.filter(record -> record.equals(beer))
+				.findFirst()
+				.orElse(beer));
 	}
 
 }

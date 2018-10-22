@@ -13,5 +13,7 @@ public interface BeerDao {
 	public List<Beer> retrieveListOfBeers();
 	
 	public void createMicrobrewRecord(Beer beer);
+	
+	public void createOrUpdateMicrobrewRecord(Beer beer);
 
 }

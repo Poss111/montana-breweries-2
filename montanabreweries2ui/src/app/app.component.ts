@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     this.microbrewService.getMicrobrews().subscribe(microbrews => this.microbrews = microbrews);
   }
 
-  private onData = (message: Message) {
+  private onData = (message: Message) => {
     this.microbrews = JSON.parse(message.body);
   }
 

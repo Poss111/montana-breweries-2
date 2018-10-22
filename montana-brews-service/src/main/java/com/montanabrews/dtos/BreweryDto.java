@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.montanabrews.dtos;
 
 import java.util.List;
