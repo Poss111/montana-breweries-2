@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.montanabrews.constants.MontanaBrewsQueryConstants;
 import com.montanabrews.daos.BeerDao;
 import com.montanabrews.daos.MontanaBrewsBaseDao;
 import com.montanabrews.entities.Beer;
@@ -32,6 +33,9 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	@Override
 	public void createOrUpdateMicrobrewRecord(Beer beer) {
 		setClassy(Beer.class);
+//		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME).uniqueResult();
+//		
+//		LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 		List<Beer> existingBeerRecords = findAll();
 
 		for (Beer beerToCheck : existingBeerRecords) {

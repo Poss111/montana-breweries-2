@@ -11,12 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.montanabrews.constants.MontanaBrewsQueryConstants;
 
 
 /**
@@ -25,6 +28,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "MICRO_BREWS")
+//@NamedQuery(name = "findBrewByName", query="SELECT Beer FROM Beer WHERE beerName = ?")
 public class Beer implements Serializable {
 
 	private static final long serialVersionUID = 1L;
