@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   constructor(private microbrewService : MicrobrewService, private websocketService: WebsocketService) {}
 
   ngOnInit() {
+    this.getMicrobrews();
     this.websocketService.connectWebSocket();
     this.datasubscription = this.websocketService.getSocketDataObservable().subscribe(this.onData);
     this.statesubscription = this.websocketService.getSocketStateObservable().subscribe(this.onStateChange);
