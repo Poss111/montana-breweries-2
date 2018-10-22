@@ -2,6 +2,7 @@ package com.montanabrews.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -37,6 +39,10 @@ public class Beer implements Serializable {
 	
 	@Column(name = "ABV")
 	private Float abv;
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "BEER_TYPE_OBJ_ID")
+	private BeerType beerType;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BREWERY_OBJ_ID")
@@ -82,6 +88,34 @@ public class Beer implements Serializable {
 	 */
 	public void setAbv(Float abv) {
 		this.abv = abv;
+	}
+
+	/**
+	 * @return the beerType
+	 */
+	public BeerType getBeerType() {
+		return beerType;
+	}
+
+	/**
+	 * @param beerType the beerType to set
+	 */
+	public void setBeerType(BeerType beerType) {
+		this.beerType = beerType;
+	}
+
+	/**
+	 * @return the brewery
+	 */
+	public Brewery getBrewery() {
+		return brewery;
+	}
+
+	/**
+	 * @param brewery the brewery to set
+	 */
+	public void setBrewery(Brewery brewery) {
+		this.brewery = brewery;
 	}
 
 	@Override

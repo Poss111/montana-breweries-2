@@ -20,6 +20,11 @@ public class BeerDto {
 	 * The Alcohol By Volume of the Microbrew
 	 */
 	private String abv;
+	
+	/**
+	 * The type of Microbrew being passed in.
+	 */
+	private String beerType;
 
 	/**
 	 * @return the beerName
@@ -47,6 +52,20 @@ public class BeerDto {
 	 */
 	public void setAbv(String abv) {
 		this.abv = abv;
+	}
+
+	/**
+	 * @return the beerType
+	 */
+	public String getBeerType() {
+		return beerType;
+	}
+
+	/**
+	 * @param beerType the beerType to set
+	 */
+	public void setBeerType(String beerType) {
+		this.beerType = beerType;
 	}
 
 	/* (non-Javadoc)
