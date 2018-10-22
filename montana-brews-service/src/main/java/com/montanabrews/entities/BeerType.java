@@ -32,9 +32,6 @@ public class BeerType {
 	
 	@Column(name = "BEER_TYPE_NME")
 	private String beerTypeNme;
-	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "beerType")
-	private Beer beer;
 
 	/**
 	 * @return the beerTypeObjId
@@ -85,7 +82,7 @@ public class BeerType {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		return EqualsBuilder.reflectionEquals(this, obj);
+		return EqualsBuilder.reflectionEquals(this, obj, "beerTypeObjId");
 	}
 	
 }

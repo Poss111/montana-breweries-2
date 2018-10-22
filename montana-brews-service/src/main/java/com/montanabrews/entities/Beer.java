@@ -40,7 +40,7 @@ public class Beer implements Serializable {
 	@Column(name = "ABV")
 	private Float abv;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "BEER_TYPE_OBJ_ID")
 	private BeerType beerType;
 	
