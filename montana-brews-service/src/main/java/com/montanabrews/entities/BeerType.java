@@ -5,9 +5,12 @@ package com.montanabrews.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -24,11 +27,14 @@ public class BeerType {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "BEER_TYPE_OBJ_ID", nullable = false)
+	@Column(name = "BEER_TYPE_OBJ_ID")
 	private Integer beerTypeObjId;
 	
 	@Column(name = "BEER_TYPE_NME")
 	private String beerTypeNme;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "beerType")
+	private Beer beer;
 
 	/**
 	 * @return the beerTypeObjId
