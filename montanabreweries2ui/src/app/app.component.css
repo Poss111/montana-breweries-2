@@ -3,6 +3,13 @@
 }
 
 .title {
-    font-size: 3em;
+    /* font-size: 3em; */
+    font-size: 3vw;
     text-align: center;
+}
+
+.mainbody {
+    background-color: #f5f4f4;
+    border-radius: 20px;
+    box-shadow: 5px 0 #e8e4e4;
 }
