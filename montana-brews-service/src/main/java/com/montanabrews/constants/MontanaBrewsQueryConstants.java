@@ -10,6 +10,6 @@ package com.montanabrews.constants;
 public class MontanaBrewsQueryConstants {
 
 	public static final String FIND_BEER_RECORD_BY_NAME = "SELECT Beer FROM Beer WHERE BEER_NAME = ?";
-	public static final String FIND_BREW_BY_NAME = "findBrewByName";
+	public static final String FIND_BREW_BY_NAME = "Beer.findBrewByName";
 
 }

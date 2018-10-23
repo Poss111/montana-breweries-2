@@ -28,7 +28,7 @@ import com.montanabrews.constants.MontanaBrewsQueryConstants;
  */
 @Entity
 @Table(name = "MICRO_BREWS")
-//@NamedQuery(name = "findBrewByName", query="SELECT Beer FROM Beer WHERE beerName = ?")
+@NamedQuery(name = "Beer.findBrewByName", query="SELECT b FROM Beer b WHERE b.beerName = :beerName")
 public class Beer implements Serializable {
 
 	private static final long serialVersionUID = 1L;

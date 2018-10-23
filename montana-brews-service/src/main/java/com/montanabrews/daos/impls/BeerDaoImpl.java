@@ -2,6 +2,7 @@ package com.montanabrews.daos.impls;
 
 import java.util.List;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -33,24 +34,18 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	@Override
 	public void createOrUpdateMicrobrewRecord(Beer beer) {
 		setClassy(Beer.class);
-//		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME).uniqueResult();
-//		
-//		LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
-		List<Beer> existingBeerRecords = findAll();
-
-		for (Beer beerToCheck : existingBeerRecords) {
-			LOG.info("Checking beer Record from Database :: ('{}')", beerToCheck);
-			LOG.info("Against requested beer Record to insert :: ('{}')", beer);
-			if (beer.getBeerName().equals(beerToCheck.getBeerName())) {
-				LOG.info("Match found!");
-				beerToCheck.setAbv(beer.getAbv());
-				if (!beer.getBeerType().equals(beerToCheck.getBeerType())) {
-					beerToCheck.setBeerType(beer.getBeerType());
-				}
-				beer = beerToCheck;
-				break;
+		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME)
+				.setString("beerName", beer.getBeerName()).uniqueResult();
+		
+		if (foundBeerRecord != null) {
+			foundBeerRecord.setAbv(beer.getAbv());
+			if (!ObjectUtils.equals(beer, foundBeerRecord)) {
+				foundBeerRecord.setBeerType(beer.getBeerType());
 			}
+			beer = foundBeerRecord;
 		}
+		
+		LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 		update(beer);
 	}
 
