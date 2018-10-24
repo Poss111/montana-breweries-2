@@ -12,6 +12,7 @@ import com.montanabrews.constants.MontanaBrewsQueryConstants;
 import com.montanabrews.daos.BeerDao;
 import com.montanabrews.daos.MontanaBrewsBaseDao;
 import com.montanabrews.entities.Beer;
+import com.montanabrews.entities.BeerType;
 
 @Repository
 @Transactional
@@ -36,16 +37,27 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 		setClassy(Beer.class);
 		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME)
 				.setString("beerName", beer.getBeerName()).uniqueResult();
+		BeerType foundBeerType = null;
+		if (beer.getBeerType() != null) {
+			foundBeerType = (BeerType) getCurrentSession()
+					.getNamedQuery(MontanaBrewsQueryConstants.BEER_TYPE_FIND_BEER_TYPE_BY_NAME)
+					.setString("beerTypeNme", beer.getBeerType().getBeerTypeNme()).uniqueResult();
+			if (foundBeerType != null) {
+				beer.setBeerType(foundBeerType);
+				LOG.info("Beer Type already existing for ('{}')", foundBeerType);			
+			} else {
+				LOG.info("Unique Beer Type will be inserted for ('{}')", beer.getBeerType());
+			}
+		}
 		
 		if (foundBeerRecord != null) {
+			LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 			foundBeerRecord.setAbv(beer.getAbv());
-			if (!ObjectUtils.equals(beer, foundBeerRecord)) {
-				foundBeerRecord.setBeerType(beer.getBeerType());
-			}
+			foundBeerRecord.setBeerType(beer.getBeerType());
 			beer = foundBeerRecord;
 		}
 		
-		LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
+		LOG.info("Inserting Beer record ('{}')",beer);
 		update(beer);
 	}
 

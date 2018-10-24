@@ -5,17 +5,17 @@ package com.montanabrews.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.montanabrews.constants.MontanaBrewsQueryConstants;
 
 /**
  * @author Dan Poss
@@ -23,6 +23,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
  */
 @Entity
 @Table(name = "BEER_TYPE_LKUP")
+@NamedQuery (name = MontanaBrewsQueryConstants.BEER_TYPE_FIND_BEER_TYPE_BY_NAME, query = "SELECT b FROM BeerType b WHERE b.beerTypeNme = :beerTypeNme")
 public class BeerType {
 	
 	@Id

@@ -11,5 +11,6 @@ public class MontanaBrewsQueryConstants {
 
 	public static final String FIND_BEER_RECORD_BY_NAME = "SELECT Beer FROM Beer WHERE BEER_NAME = ?";
 	public static final String FIND_BREW_BY_NAME = "Beer.findBrewByName";
+	public static final String BEER_TYPE_FIND_BEER_TYPE_BY_NAME = "BeerType.findBeerTypeByName";
 
 }
