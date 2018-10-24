@@ -74,7 +74,7 @@ public class MicrobrewController {
 
 	/**
 	 * This method is to be used to insert a Brewery Record into the Database using
-	 * the epxected Json - Daniel
+	 * the expected Json - Daniel
 	 * 
 	 * @param breweryDto
 	 * @throws Exception

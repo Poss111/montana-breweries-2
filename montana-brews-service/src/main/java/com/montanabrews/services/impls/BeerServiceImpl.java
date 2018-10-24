@@ -30,7 +30,7 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	@Override
-	public void insertBrew(BeerDto beerDto) {
+	public void insertBrew(BeerDto beerDto) throws Exception {
 		LOG.debug("Montana Brews :: inserting given record ('{}')", beerDto);
 		beerDao.createOrUpdateMicrobrewRecord(beerMapper.beerDtoToBeer(beerDto));
 	}

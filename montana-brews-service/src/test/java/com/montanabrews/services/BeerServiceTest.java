@@ -57,7 +57,7 @@ public class BeerServiceTest {
 	}
 	
 	@Test
-	public void test_insertBrew_validateThatcreateMicrobrewRecordIsCalledOnceWithGivenBeerDtoRecord() {
+	public void test_insertBrew_validateThatcreateMicrobrewRecordIsCalledOnceWithGivenBeerDtoRecord() throws Exception {
 		BeerDto beerDtoToInsert = new BeerDto();
 		Beer convertedBeerToInsert = beerMapper.beerDtoToBeer(beerDtoToInsert);
 		when(mockBeerMapper.beerDtoToBeer(beerDtoToInsert)).thenReturn(convertedBeerToInsert);

@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -18,12 +19,15 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.montanabrews.constants.MontanaBrewsQueryConstants;
+
 /**
  * @author Dan Poss This class is to be used to store the Brewery records in the
  *         Database for the Montana-Brews Service.
  */
 @Entity
 @Table(name = "BREWERIES")
+@NamedQuery( name = MontanaBrewsQueryConstants.BREWERY_FIND_BREWERY_BY_NAME, query = MontanaBrewsQueryConstants.BREWERY_FIND_BREWERY_BY_NAME_QUERY)
 public class Brewery implements Serializable {
 
 	private static final long serialVersionUID = -9213858388930151162L;

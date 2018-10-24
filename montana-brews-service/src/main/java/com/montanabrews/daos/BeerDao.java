@@ -14,6 +14,6 @@ public interface BeerDao {
 	
 	public void createMicrobrewRecord(Beer beer);
 	
-	public void createOrUpdateMicrobrewRecord(Beer beer);
+	public void createOrUpdateMicrobrewRecord(Beer beer) throws Exception;
 
 }

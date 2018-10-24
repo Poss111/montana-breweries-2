@@ -25,6 +25,11 @@ public class BeerDto {
 	 * The type of Microbrew being passed in.
 	 */
 	private String beerType;
+	
+	/**
+	 * The associated Brewery that the Microbrew belongs to.
+	 */
+	private String brewery;
 
 	/**
 	 * @return the beerName
@@ -66,6 +71,20 @@ public class BeerDto {
 	 */
 	public void setBeerType(String beerType) {
 		this.beerType = beerType;
+	}
+
+	/**
+	 * @return the brewery
+	 */
+	public String getBrewery() {
+		return brewery;
+	}
+
+	/**
+	 * @param brewery the brewery to set
+	 */
+	public void setBrewery(String brewery) {
+		this.brewery = brewery;
 	}
 
 	/* (non-Javadoc)

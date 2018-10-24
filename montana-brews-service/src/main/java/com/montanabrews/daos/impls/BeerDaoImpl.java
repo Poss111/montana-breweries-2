@@ -3,6 +3,7 @@ package com.montanabrews.daos.impls;
 import java.util.List;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import com.montanabrews.daos.BeerDao;
 import com.montanabrews.daos.MontanaBrewsBaseDao;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.entities.BeerType;
+import com.montanabrews.entities.Brewery;
 
 @Repository
 @Transactional
@@ -23,7 +25,11 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	@Override
 	public List<Beer> retrieveListOfBeers() {
 		setClassy(Beer.class);
-		return this.findAll();
+		List<Beer> foundRecords = findAll();
+		for (Beer beer : foundRecords) {
+			LOG.info("Beer records found ('{}')", beer);
+		}
+		return foundRecords;
 	}
 
 	@Override
@@ -33,13 +39,26 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	}
 
 	@Override
-	public void createOrUpdateMicrobrewRecord(Beer beer) {
+	public void createOrUpdateMicrobrewRecord(Beer beer) throws Exception {
 		setClassy(Beer.class);
 		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME)
 				.setString("beerName", beer.getBeerName()).uniqueResult();
-		BeerType foundBeerType = null;
+		
+		if (StringUtils.isNotBlank(beer.getBrewery().getBreweryName())) {
+			Brewery foundBrewery = (Brewery) getCurrentSession()
+					.getNamedQuery(MontanaBrewsQueryConstants.BREWERY_FIND_BREWERY_BY_NAME)
+					.setString("breweryName", beer.getBrewery().getBreweryName()).uniqueResult();
+			if (foundBrewery != null) {
+				LOG.info("Found Brewery to associate to Beer record for insertion. ('{}')", foundBrewery);
+				beer.setBrewery(foundBrewery);
+			} else {
+				LOG.error("Cannot find given Brewery Name to associate to requested Microbrew Record ('{}')",beer.getBrewery().getBreweryName());
+				throw new Exception("Cannot insert Microbrew record with Non-Existant Brewery Name");
+			}
+		}
+		
 		if (beer.getBeerType() != null) {
-			foundBeerType = (BeerType) getCurrentSession()
+			BeerType foundBeerType = (BeerType) getCurrentSession()
 					.getNamedQuery(MontanaBrewsQueryConstants.BEER_TYPE_FIND_BEER_TYPE_BY_NAME)
 					.setString("beerTypeNme", beer.getBeerType().getBeerTypeNme()).uniqueResult();
 			if (foundBeerType != null) {
