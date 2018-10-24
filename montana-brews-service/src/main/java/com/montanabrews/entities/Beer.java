@@ -48,7 +48,7 @@ public class Beer implements Serializable {
 	@JoinColumn(name = "BEER_TYPE_OBJ_ID")
 	private BeerType beerType;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "BREWERY_OBJ_ID")
 	private Brewery brewery;
 	

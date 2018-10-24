@@ -11,6 +11,7 @@
               <th>Name</th>
               <th>ABV (%)</th>
               <th>Beer Type</th>
+              <th>Brewery</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-microbrew>
@@ -18,6 +19,7 @@
               <td>{{microbrew.beerName}}</td>
               <td>{{microbrew.abv}}</td>
               <td>{{microbrew.beerType}}</td>
+              <td>{{microbrew.brewery}}</td>
           </tr>
         </ng-template>
       </p-table>

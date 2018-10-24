@@ -25,11 +25,7 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	@Override
 	public List<Beer> retrieveListOfBeers() {
 		setClassy(Beer.class);
-		List<Beer> foundRecords = findAll();
-		for (Beer beer : foundRecords) {
-			LOG.info("Beer records found ('{}')", beer);
-		}
-		return foundRecords;
+		return findAll();
 	}
 
 	@Override
@@ -73,6 +69,7 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 			LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 			foundBeerRecord.setAbv(beer.getAbv());
 			foundBeerRecord.setBeerType(beer.getBeerType());
+			foundBeerRecord.setBrewery(beer.getBrewery());
 			beer = foundBeerRecord;
 		}
 		
