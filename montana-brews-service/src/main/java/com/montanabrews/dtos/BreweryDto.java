@@ -12,23 +12,38 @@ import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Dan Poss
- *
+ * This class will be used to handle the Brewery request coming in from the Users.
  */
 @Validated
 public class BreweryDto {
 
+	/**
+	 * The given Brewery's Name.
+	 */
 	@NotNull
 	private String breweryName;
 	
+	/**
+	 * The address of said Brewery.
+	 */
 	private String breweryAddress;
 	
+	/**
+	 * The state that the Brewery is located in, this will be given in 2 Char format i.e. TX
+	 */
 	@Pattern(regexp="[A-Z]{2}", message = "Your state should be of the format 'AA'")
 	private String state;
 	
+	/**
+	 * This is the corresponding rating of the Brewery.
+	 */
 	@Min(value=0, message = "Rating should not be less than {value}")
 	@Max(value=5, message = "Rating should not be more than {value}")
 	private Integer rating;
 	
+	/**
+	 * This is the zipcode for the said Brewery.
+	 */
 	private Integer zipcode;
 	
 	/**

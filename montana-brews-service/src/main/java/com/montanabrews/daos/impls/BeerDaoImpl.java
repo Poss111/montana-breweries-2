@@ -40,7 +40,7 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 		Beer foundBeerRecord = (Beer) getCurrentSession().getNamedQuery(MontanaBrewsQueryConstants.FIND_BREW_BY_NAME)
 				.setString("beerName", beer.getBeerName()).uniqueResult();
 		
-		if (StringUtils.isNotBlank(beer.getBrewery().getBreweryName())) {
+		if (beer.getBrewery() != null && StringUtils.isNotBlank(beer.getBrewery().getBreweryName())) {
 			Brewery foundBrewery = (Brewery) getCurrentSession()
 					.getNamedQuery(MontanaBrewsQueryConstants.BREWERY_FIND_BREWERY_BY_NAME)
 					.setString("breweryName", beer.getBrewery().getBreweryName()).uniqueResult();
@@ -68,8 +68,10 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 		if (foundBeerRecord != null) {
 			LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 			foundBeerRecord.setAbv(beer.getAbv());
-			foundBeerRecord.setBeerType(beer.getBeerType());
-			foundBeerRecord.setBrewery(beer.getBrewery());
+			if (beer.getBeerType() != null)
+				foundBeerRecord.setBeerType(beer.getBeerType());
+			if (beer.getBrewery() != null)
+				foundBeerRecord.setBrewery(beer.getBrewery());
 			beer = foundBeerRecord;
 		}
 		

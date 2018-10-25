@@ -1,5 +1,8 @@
 package com.montanabrews.dtos;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -30,6 +33,13 @@ public class BeerDto {
 	 * The associated Brewery that the Microbrew belongs to.
 	 */
 	private String brewery;
+	
+	/**
+	 * The rating associated to the given Microbrew record.
+	 */
+	@Min(value=0, message = "Rating should not be less than {value}")
+	@Max(value=5, message = "Rating should not be more than {value}")
+	private Integer rating;
 
 	/**
 	 * @return the beerName
@@ -85,6 +95,20 @@ public class BeerDto {
 	 */
 	public void setBrewery(String brewery) {
 		this.brewery = brewery;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public Integer getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	/* (non-Javadoc)

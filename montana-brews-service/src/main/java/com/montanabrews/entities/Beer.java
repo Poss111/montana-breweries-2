@@ -123,6 +123,20 @@ public class Beer implements Serializable {
 	 */
 	public void setBrewery(Brewery brewery) {
 		this.brewery = brewery;
+	}	
+	
+	/**
+	 * @return the rating
+	 */
+	public Integer getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	@Override

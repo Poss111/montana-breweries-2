@@ -1,5 +1,6 @@
 package com.montanabrews.util;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -20,7 +21,10 @@ public class BeerDtoMapper {
 	public BeerDto beerToBeerDto(Beer beer) {
 		Converter<Brewery, String> fromBreweryToString = new AbstractConverter<Brewery, String>() {
 			protected String convert(Brewery breweryToReturn) {
-				return breweryToReturn.getBreweryName();
+				if (breweryToReturn != null) {
+					return breweryToReturn.getBreweryName();
+				}
+				return null;
 			}
 		};		
 		modelMapper.addConverter(fromBreweryToString);
@@ -35,16 +39,22 @@ public class BeerDtoMapper {
 		};
 		Converter<String, BeerType> toBeerTypeFromString = new AbstractConverter<String, BeerType>() {
 			protected BeerType convert(String dtoBeerType) {
-				BeerType beerType = new BeerType();
-				beerType.setBeerTypeNme(dtoBeerType);
-				return beerType;
+				if (StringUtils.isNotBlank(dtoBeerType)) {
+					BeerType beerType = new BeerType();
+					beerType.setBeerTypeNme(dtoBeerType);
+					return beerType;
+				}
+				return null;
 			}
 		};
 		Converter<String, Brewery> toBreweryFromString = new AbstractConverter<String, Brewery>() {
 			protected Brewery convert(String dtoBreweryName) {
-				Brewery brewery = new Brewery();
-				brewery.setBreweryName(dtoBreweryName);
-				return brewery;
+				if (StringUtils.isNotBlank(dtoBreweryName)) {
+					Brewery brewery = new Brewery();
+					brewery.setBreweryName(dtoBreweryName);
+					return brewery;
+				}
+				return null;
 			}
 		};
 		modelMapper.addConverter(toFloatFromStringConverter);
