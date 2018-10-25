@@ -1,20 +1,20 @@
 package com.montanabrews.dtos;
 
-import java.util.List;
-
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-
-import com.montanabrews.entities.Beer;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Dan Poss
  *
  */
+@Validated
 public class BreweryDto {
 
 	@NotNull
@@ -22,7 +22,13 @@ public class BreweryDto {
 	
 	private String breweryAddress;
 	
-	@Size(min=5,max=5, message="Zipcode should be 5 Digits")
+	@Pattern(regexp="[A-Z]{2}", message = "Your state should be of the format 'AA'")
+	private String state;
+	
+	@Min(value=0, message = "Rating should not be less than {value}")
+	@Max(value=5, message = "Rating should not be more than {value}")
+	private Integer rating;
+	
 	private Integer zipcode;
 	
 	/**
@@ -66,6 +72,34 @@ public class BreweryDto {
 	public void setZipcode(Integer zipcode) {
 		this.zipcode = zipcode;
 	}		
+
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public Integer getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

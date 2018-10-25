@@ -45,7 +45,13 @@ public class Brewery implements Serializable {
 
 	@Column(name = "BREWERY_ZIPCODE")
 	private Integer zipcode;
+	
+	@Column(name = "STATE")
+	private String state;
 
+	@Column(name = "BREWERY_RATING")
+	private Integer rating;
+	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="BREWERY_OBJ_ID")
 	@OrderBy("beerName asc")
@@ -124,6 +130,34 @@ public class Brewery implements Serializable {
 	 */
 	public void setMicrobrews(List<Beer> microbrews) {
 		this.microbrews = microbrews;
+	}		
+
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public Integer getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	/*
