@@ -14,4 +14,6 @@ public interface BreweryDao {
 	
 	public void createBreweryRecord(Brewery brewery);
 	
+	public void createOrUpdateBreweryRecord(Brewery brewery);
+	
 }

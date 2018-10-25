@@ -38,7 +38,7 @@ public class BreweryServiceImpl implements BreweryService {
 	public void insertBrewery(BreweryDto breweryDto) {
 		Brewery breweryRecordToInsert = breweryDtoMapper.breweryDtoToBrewery(breweryDto);
 		LOG.info("Inserting following brewery record into Database :: ('{}')", breweryRecordToInsert);
-		breweryDao.createBreweryRecord(breweryRecordToInsert);
+		breweryDao.createOrUpdateBreweryRecord(breweryRecordToInsert);
 	}
 
 	/* (non-Javadoc)

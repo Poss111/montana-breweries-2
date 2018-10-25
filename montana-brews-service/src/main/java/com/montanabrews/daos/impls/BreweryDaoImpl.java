@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.montanabrews.constants.MontanaBrewsQueryConstants;
 import com.montanabrews.daos.BreweryDao;
 import com.montanabrews.daos.MontanaBrewsBaseDao;
+import com.montanabrews.entities.Beer;
 import com.montanabrews.entities.Brewery;
 
 /**
@@ -36,6 +38,24 @@ public class BreweryDaoImpl extends MontanaBrewsBaseDao<Brewery> implements Brew
 		setClassy(Brewery.class);
 		LOG.info("Creating a record of brewery :: ('{}')", brewery);
 		create(brewery);
+	}
+
+	@Override
+	public void createOrUpdateBreweryRecord(Brewery brewery) {
+		setClassy(Brewery.class);
+		LOG.info("Brewery record to insert ('{}')", brewery);
+		
+		Brewery existingBreweryRecord = (Brewery) getCurrentSession()
+				.getNamedQuery(MontanaBrewsQueryConstants.BREWERY_FIND_BREWERY_BY_NAME)
+				.setString("breweryName", brewery.getBreweryName()).uniqueResult();
+	
+		if (existingBreweryRecord != null) {
+			existingBreweryRecord.setBreweryAddress(brewery.getBreweryAddress());
+			existingBreweryRecord.setZipcode(brewery.getZipcode());
+			brewery = existingBreweryRecord;
+		}
+		
+		update(brewery);
 	}
 
 }

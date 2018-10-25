@@ -32,20 +32,12 @@ public class BreweryDtoMapperTest {
 		brewery.setBreweryName("Berwery One");
 		brewery.setBreweryAddress("Location Location");
 		brewery.setZipcode(54321);
-		List<Beer> beerList = new ArrayList<Beer>();
-		Beer beerOne = new Beer();
-		beerOne.setAbv(2.3F);
-		beerOne.setBeerName("Beer One");
-		beerList.add(beerOne);
-		brewery.setMicrobrews(beerList);
 		
 		BreweryDto breweryDto = breweryDtoMapper.breweryToBreweryDto(brewery);
 		
 		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getBreweryAddress(), brewery.getBreweryAddress()));
 		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getBreweryName(), brewery.getBreweryName()));
 		assertEquals(breweryDto.getZipcode(), brewery.getZipcode());
-		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getMicrobrews().get(0).getBeerName(), brewery.getMicrobrews().get(0).getBeerName()));
-		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getMicrobrews().get(0).getAbv(), Float.toString(brewery.getMicrobrews().get(0).getAbv())));
 	}
 	
 	@Test
@@ -54,20 +46,12 @@ public class BreweryDtoMapperTest {
 		breweryDto.setBreweryName("Berwery One");
 		breweryDto.setBreweryAddress("Location Location");
 		breweryDto.setZipcode(54321);
-		List<BeerDto> beerDtoList = new ArrayList<BeerDto>();
-		BeerDto beerDto = new BeerDto();
-		beerDto.setAbv("2.3");
-		beerDto.setBeerName("Beer One");
-		beerDtoList.add(beerDto);
-		breweryDto.setMicrobrews(beerDtoList);
 		
 		Brewery brewery = breweryDtoMapper.breweryDtoToBrewery(breweryDto);
 		
 		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getBreweryAddress(), brewery.getBreweryAddress()));
 		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getBreweryName(), brewery.getBreweryName()));
 		assertEquals(breweryDto.getZipcode(), brewery.getZipcode());
-		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getMicrobrews().get(0).getBeerName(), brewery.getMicrobrews().get(0).getBeerName()));
-		assertTrue(StringUtils.equalsIgnoreCase(breweryDto.getMicrobrews().get(0).getAbv(), Float.toString(brewery.getMicrobrews().get(0).getAbv())));
 	}
 
 }
