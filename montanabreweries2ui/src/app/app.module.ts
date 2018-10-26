@@ -12,11 +12,13 @@ import { BreweriesService } from './services/breweries.service';
 import { WebsocketService } from './services/websocket.service';
 import { StompService, StompConfig } from '@stomp/ng2-stompjs';
 import { stompConfig } from './constants/stomp-config.module';
+import { BeerTileComponent } from './components/beer-tile/beer-tile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    BreweriesGridComponent
+    BreweriesGridComponent,
+    BeerTileComponent
   ],
   imports: [
     BrowserModule,
