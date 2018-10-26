@@ -58,7 +58,7 @@ public class BreweryServiceTest {
 		Brewery convertedBrewery = breweryDtoMapper.breweryDtoToBrewery(breweryDtoToInsert);
 		when(mockBreweryDtoMapper.breweryDtoToBrewery(breweryDtoToInsert)).thenReturn(convertedBrewery);
 		breweryService.insertBrewery(breweryDtoToInsert);
-		verify(mockBreweryDao,times(1)).createBreweryRecord(convertedBrewery);
+		verify(mockBreweryDao,times(1)).createOrUpdateBreweryRecord(convertedBrewery);
 	}
 	
 	@Test

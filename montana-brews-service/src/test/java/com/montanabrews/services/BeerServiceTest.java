@@ -62,7 +62,7 @@ public class BeerServiceTest {
 		Beer convertedBeerToInsert = beerMapper.beerDtoToBeer(beerDtoToInsert);
 		when(mockBeerMapper.beerDtoToBeer(beerDtoToInsert)).thenReturn(convertedBeerToInsert);
 		beerService.insertBrew(beerDtoToInsert);
-		verify(beerDao,times(1)).createMicrobrewRecord(convertedBeerToInsert);
+		verify(beerDao,times(1)).createOrUpdateMicrobrewRecord(convertedBeerToInsert);
 	}
 
 }

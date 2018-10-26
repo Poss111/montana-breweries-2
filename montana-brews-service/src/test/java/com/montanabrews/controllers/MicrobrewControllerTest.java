@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Propagation;
@@ -51,6 +52,9 @@ public class MicrobrewControllerTest {
 
 	@Mock
 	BreweryDtoMapper mockBreweryDtoMapper;
+	
+	@Mock
+	SimpMessagingTemplate mockTemplate;	
 	
 	@Autowired
 	BeerDtoMapper beerDtoMapper;
@@ -88,9 +92,11 @@ public class MicrobrewControllerTest {
 	
 	@Test
 	public void test_insertBrewRecord_validateThatMethodTakesInAndCallsInsertMethodFromBeerService() throws Exception {
+		List<Beer> beerListToBeMapped = new ArrayList<>();
 		BeerDto beerDtoToInsert = new BeerDto();
 		beerDtoToInsert.setAbv("1.2");
 		beerDtoToInsert.setBeerName("BeerOne");
+		when(mockBeerService.returnAllMicrobrews()).thenReturn(beerListToBeMapped);	
 		microbrewController.insertBrewRecord(beerDtoToInsert);
 		verify(mockBeerService, times(1)).insertBrew(beerDtoToInsert);
 	}

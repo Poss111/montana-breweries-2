@@ -2,8 +2,8 @@ package com.montanabrews.daos.impls;
 
 import java.util.List;
 
-import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.criterion.Criterion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -68,6 +68,7 @@ public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 		if (foundBeerRecord != null) {
 			LOG.info("Found Beer record by name ('{}')", foundBeerRecord);
 			foundBeerRecord.setAbv(beer.getAbv());
+			foundBeerRecord.setRating(beer.getRating());
 			if (beer.getBeerType() != null)
 				foundBeerRecord.setBeerType(beer.getBeerType());
 			if (beer.getBrewery() != null)

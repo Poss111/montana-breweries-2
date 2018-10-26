@@ -48,6 +48,9 @@ public class Brewery implements Serializable {
 	
 	@Column(name = "STATE")
 	private String state;
+	
+	@Column(name = "TOWN")
+	private String town;
 
 	@Column(name = "BREWERY_RATING")
 	private Integer rating;
@@ -131,6 +134,20 @@ public class Brewery implements Serializable {
 	public void setMicrobrews(List<Beer> microbrews) {
 		this.microbrews = microbrews;
 	}		
+
+	/**
+	 * @return the town
+	 */
+	public String getTown() {
+		return town;
+	}
+
+	/**
+	 * @param town the town to set
+	 */
+	public void setTown(String town) {
+		this.town = town;
+	}
 
 	/**
 	 * @return the state

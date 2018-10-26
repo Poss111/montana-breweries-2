@@ -52,6 +52,9 @@ public class BreweryDaoImpl extends MontanaBrewsBaseDao<Brewery> implements Brew
 		if (existingBreweryRecord != null) {
 			existingBreweryRecord.setBreweryAddress(brewery.getBreweryAddress());
 			existingBreweryRecord.setZipcode(brewery.getZipcode());
+			existingBreweryRecord.setRating(brewery.getRating());
+			existingBreweryRecord.setTown(brewery.getTown());
+			existingBreweryRecord.setState(brewery.getState());
 			brewery = existingBreweryRecord;
 		}
 		

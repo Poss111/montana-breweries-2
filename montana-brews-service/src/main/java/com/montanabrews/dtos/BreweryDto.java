@@ -35,6 +35,11 @@ public class BreweryDto {
 	private String state;
 	
 	/**
+	 * The town that the Brewery is located in.
+	 */
+	private String town;
+	
+	/**
 	 * This is the corresponding rating of the Brewery.
 	 */
 	@Min(value=0, message = "Rating should not be less than {value}")
@@ -100,6 +105,20 @@ public class BreweryDto {
 	 */
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	/**
+	 * @return the town
+	 */
+	public String getTown() {
+		return town;
+	}
+
+	/**
+	 * @param town the town to set
+	 */
+	public void setTown(String town) {
+		this.town = town;
 	}
 
 	/**
