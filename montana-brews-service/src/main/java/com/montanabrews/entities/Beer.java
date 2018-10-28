@@ -19,8 +19,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.montanabrews.constants.MontanaBrewsQueryConstants;
-
 
 /**
  * @author Dan Poss
@@ -34,7 +32,7 @@ public class Beer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BEER_OBJ_ID", nullable = false)
 	private Integer beerObjId;
 	
@@ -47,7 +45,7 @@ public class Beer implements Serializable {
 	@Column(name = "BEER_RATING")
 	private Integer rating;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "BEER_TYPE_OBJ_ID")
 	private BeerType beerType;
 	
