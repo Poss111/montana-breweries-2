@@ -27,7 +27,7 @@ import com.montanabrews.constants.MontanaBrewsQueryConstants;
 public class BeerType {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "BEER_TYPE_OBJ_ID")
 	private Integer beerTypeObjId;
 	

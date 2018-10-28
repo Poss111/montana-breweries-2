@@ -1,4 +1,4 @@
-package com.montanabrews.daos.impls;
+package com.montanabrews.daos.hibernate.impls;
 
 import java.util.List;
 
@@ -16,8 +16,6 @@ import com.montanabrews.entities.Beer;
 import com.montanabrews.entities.BeerType;
 import com.montanabrews.entities.Brewery;
 
-@Repository
-@Transactional
 public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BeerDaoImpl.class);
