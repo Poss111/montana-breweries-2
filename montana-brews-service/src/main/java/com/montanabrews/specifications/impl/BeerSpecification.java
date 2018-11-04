@@ -6,13 +6,16 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.montanabrews.entities.Beer;
-import com.montanabrews.entities.Brewery;
 import com.montanabrews.util.SearchCriteria;
 
 public class BeerSpecification implements Specification<Beer> {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(BeerSpecification.class);
 
 	private SearchCriteria searchCriteria;
 
@@ -23,25 +26,26 @@ public class BeerSpecification implements Specification<Beer> {
 
 	@Override
 	public Predicate toPredicate(Root<Beer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-		if (searchCriteria.getOperation().equalsIgnoreCase("<")) {
-			return criteriaBuilder.greaterThan(root.<String>get(searchCriteria.getKey()), searchCriteria.getValue());
-		} else if (searchCriteria.getOperation().equalsIgnoreCase(">")) {
-			return criteriaBuilder.lessThan(root.<String>get(searchCriteria.getKey()), searchCriteria.getValue());
-		} else if (searchCriteria.getOperation().equalsIgnoreCase(":")) {
-			if (root.get(searchCriteria.getKey()).getJavaType() == String.class) {
-				return criteriaBuilder.like(root.<String>get(searchCriteria.getKey()),
+		return buildCriteriaForBeer(root, searchCriteria, criteriaBuilder);
+	}
+	
+	public Predicate buildCriteriaForBeer(Path<?> path, SearchCriteria searchCriteria, CriteriaBuilder criteriaBuilder) {		
+		if (searchCriteria.getOperation().equalsIgnoreCase("^")) {
+			LOG.info("recursive function hit, reaching further");
+			return buildCriteriaForBeer(path.get(searchCriteria.getKey()), searchCriteria.getSearchCriteria(), criteriaBuilder);
+		} switch(searchCriteria.getOperation().trim()) {
+			case "<":
+				LOG.info("Filtering by <");
+				return criteriaBuilder.greaterThan(path.<String>get(searchCriteria.getKey()), searchCriteria.getValue());
+			case ">":
+				LOG.info("Filtering by >");
+				return criteriaBuilder.lessThan(path.<String>get(searchCriteria.getKey()), searchCriteria.getValue());
+			case ":":
+				LOG.info("Filtering by LIKE");
+				return criteriaBuilder.like(path.<String>get(searchCriteria.getKey()),
 						"%" + searchCriteria.getValue() + "%");
-			} else {
-				return criteriaBuilder.equal(root.get(searchCriteria.getKey()), searchCriteria.getValue());
-			}
-		} else if (searchCriteria.getOperation().equalsIgnoreCase("^")) {
-			if (root.get(searchCriteria.getKey()).getJavaType() == Brewery.class) {
-				if (searchCriteria.getSearchCriteria().getOperation().equalsIgnoreCase(":")) {
-					return criteriaBuilder.like(
-							root.get(searchCriteria.getKey()).<String>get(searchCriteria.getSearchCriteria().getKey()),
-							"%" + searchCriteria.getSearchCriteria().getValue() + "%");
-				}
-			}
+			default:
+				LOG.error("Invalid filter operation given to filter Beer results with ('{}')", searchCriteria.getOperation());
 		}
 		return null;
 	}

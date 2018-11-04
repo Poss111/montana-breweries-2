@@ -2,7 +2,6 @@ package com.montanabrews.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specifications;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -43,7 +41,7 @@ public class SpecificationTest {
 	@Test
 	@Transactional
 	@Rollback(true)
-	public void test() throws Exception {
+	public void test_toPredicate_filteringForBeerByLikeAndBeerName() throws Exception {
 		List<Beer> expectedInsertedBeer = new ArrayList<>();
 		Beer beerOneToInsert = new Beer();
 		beerOneToInsert.setAbv(0F);
@@ -78,7 +76,7 @@ public class SpecificationTest {
 	@Test
 	@Transactional
 	@Rollback(true)
-	public void test_two() throws Exception {
+	public void test_toPredicate_filterByLikeAndBreweryName() throws Exception {
 		List<Beer> expectedInsertedBeer = new ArrayList<>();
 		Brewery brewery = new Brewery();
 		brewery.setBreweryName("BreweryOne");
@@ -115,6 +113,54 @@ public class SpecificationTest {
 		insideSearchCriteria.setKey("breweryName");
 		insideSearchCriteria.setOperation(":");
 		insideSearchCriteria.setValue("BreweryOne");
+		searchCriteria.setSearchCriteria(insideSearchCriteria);
+		BeerSpecification beerSpecification = new BeerSpecification(searchCriteria);
+		
+		List<Beer> foundBeer = beerRepository.findAll(beerSpecification);
+		
+		assertTrue(foundBeer.contains(beerOneToInsert));
+	}
+
+	@Test
+	@Transactional
+	@Rollback(true)
+	public void test_toPredicate_filterByLikeAndBeerTypeName() throws Exception {
+		List<Beer> expectedInsertedBeer = new ArrayList<>();
+		Brewery brewery = new Brewery();
+		brewery.setBreweryName("BreweryOne");
+		
+		breweryDao.createBreweryRecord(brewery);
+		
+		BeerType beerType = new BeerType();
+		beerType.setBeerTypeNme("Test Beer Type");
+		BeerType updatedBeerType = new BeerType();
+		updatedBeerType.setBeerTypeNme("Test Updated Type");
+		
+		Beer beerOneToInsert = new Beer();
+		beerOneToInsert.setAbv(0F);
+		beerOneToInsert.setBeerName("BeerOne");
+		beerOneToInsert.setBeerType(beerType);
+		beerOneToInsert.setRating(0);
+		Beer beerTwoToInsert = new Beer();
+		beerTwoToInsert.setAbv(0F);
+		beerTwoToInsert.setBeerName("BeerOne");	
+		beerTwoToInsert.setBeerType(updatedBeerType);
+		beerTwoToInsert.setRating(2);
+		beerTwoToInsert.setBrewery(brewery);
+		expectedInsertedBeer.add(beerOneToInsert);		
+		expectedInsertedBeer.add(beerTwoToInsert);		
+		
+		for (Beer beerToInsert : expectedInsertedBeer) {
+			beerDao.createOrUpdateMicrobrewRecord(beerToInsert);
+		}		
+		
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setKey("beerType");
+		searchCriteria.setOperation("^");
+		SearchCriteria insideSearchCriteria = new SearchCriteria();
+		insideSearchCriteria.setKey("beerTypeNme");
+		insideSearchCriteria.setOperation(":");
+		insideSearchCriteria.setValue(updatedBeerType.getBeerTypeNme());
 		searchCriteria.setSearchCriteria(insideSearchCriteria);
 		BeerSpecification beerSpecification = new BeerSpecification(searchCriteria);
 		
