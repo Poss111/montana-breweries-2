@@ -51,8 +51,8 @@ public class BeerServiceTest {
 	@Test
 	public void test_returnAllMicrobrews_validateThatMethodReturnsANonNullListOfBeer() {
 		List<Beer> testListOfBeer = new ArrayList<>();
-		when(beerDao.retrieveListOfBeers()).thenReturn(testListOfBeer);
-		List<Beer> actualListOfBeer = beerService.returnAllMicrobrews();
+		when(beerDao.retrieveListOfBeers(null)).thenReturn(testListOfBeer);
+		List<Beer> actualListOfBeer = beerService.returnAllMicrobrews(null);
 		assertEquals(testListOfBeer,actualListOfBeer);
 	}
 	

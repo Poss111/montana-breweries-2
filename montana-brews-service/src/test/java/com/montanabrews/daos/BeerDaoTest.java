@@ -35,7 +35,7 @@ public class BeerDaoTest {
 	@Transactional
 	@Rollback(true)
 	public void test_retrieveListOfBeers_validateThatMethodReturnsANonNullListOfBeerEntities() {
-		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers();
+		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers(null);
 		assertNotNull(listOfBeerFromDB);
 	}
 	
@@ -59,7 +59,7 @@ public class BeerDaoTest {
 		beerDao.createMicrobrewRecord(beerOneToInsert);
 		beerDao.createMicrobrewRecord(beerTwoToInsert);
 		beerDao.createMicrobrewRecord(beerThreeToInsert);
-		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers();
+		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers(null);
 		assertEquals(expectedInsertedBeer, listOfBeerFromDB);
 	}
 	
@@ -84,7 +84,7 @@ public class BeerDaoTest {
 		for (Beer beerToInsert : expectedInsertedBeer) {
 			beerDao.createOrUpdateMicrobrewRecord(beerToInsert);
 		}
-		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers();
+		List<Beer> listOfBeerFromDB = beerDao.retrieveListOfBeers(null);
 		assertEquals(expectedInsertedBeer, listOfBeerFromDB);
 	}
 	
@@ -123,7 +123,7 @@ public class BeerDaoTest {
 		
 		expectedInsertedBeer.remove(0);
 		
-		List<Beer> actualInsertedBeerList = beerDao.retrieveListOfBeers();
+		List<Beer> actualInsertedBeerList = beerDao.retrieveListOfBeers(null);
 		assertEquals(expectedInsertedBeer,actualInsertedBeerList);			
 	}
 	

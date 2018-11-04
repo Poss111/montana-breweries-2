@@ -21,6 +21,7 @@ import com.montanabrews.services.BeerService;
 import com.montanabrews.services.BreweryService;
 import com.montanabrews.util.BeerDtoMapper;
 import com.montanabrews.util.BreweryDtoMapper;
+import com.montanabrews.util.SearchCriteria;
 
 @RestController
 public class MicrobrewController {
@@ -53,8 +54,8 @@ public class MicrobrewController {
 	 * @return A List of BeerDtos
 	 */
 	@RequestMapping(value = MontanaBrewsAPIConstants.MICROBREW_LIST_API, method = RequestMethod.POST)
-	public List<BeerDto> returnListOfBeer() throws Exception {
-		return beerService.returnAllMicrobrews().stream().map(record -> beerDtoMapper.beerToBeerDto(record))
+	public List<BeerDto> returnListOfBeer(@RequestBody(required=false) SearchCriteria searchCriteria) throws Exception {
+		return beerService.returnAllMicrobrews(searchCriteria).stream().map(record -> beerDtoMapper.beerToBeerDto(record))
 				.collect(Collectors.toList());
 	}
 
@@ -69,7 +70,7 @@ public class MicrobrewController {
 	public void insertBrewRecord(@RequestBody BeerDto beerDto) throws Exception {
 		LOG.info("Record to insert into Database from Controller :: {}", beerDto);
 		beerService.insertBrew(beerDto);
-		template.convertAndSend("/topic/hello", returnListOfBeer());
+		template.convertAndSend("/topic/hello", returnListOfBeer(null));
 	}
 
 	/**

@@ -15,13 +15,14 @@ import com.montanabrews.daos.MontanaBrewsBaseDao;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.entities.BeerType;
 import com.montanabrews.entities.Brewery;
+import com.montanabrews.util.SearchCriteria;
 
 public class BeerDaoImpl extends MontanaBrewsBaseDao<Beer> implements BeerDao {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BeerDaoImpl.class);
 	
 	@Override
-	public List<Beer> retrieveListOfBeers() {
+	public List<Beer> retrieveListOfBeers(SearchCriteria searchCriteria) {
 		setClassy(Beer.class);
 		return findAll();
 	}

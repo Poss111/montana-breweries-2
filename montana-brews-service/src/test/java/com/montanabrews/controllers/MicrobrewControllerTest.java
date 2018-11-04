@@ -70,8 +70,8 @@ public class MicrobrewControllerTest {
 	@Test
 	public void test_returnListOfBeer_validateThatMethodReturnsListOfBeerDtoWhenEmpty() throws Exception {
 		List<Beer> beerListToBeMapped = new ArrayList<>();
-		when(mockBeerService.returnAllMicrobrews()).thenReturn(beerListToBeMapped);
-		List<BeerDto> beerListToReturn = microbrewController.returnListOfBeer();
+		when(mockBeerService.returnAllMicrobrews(null)).thenReturn(beerListToBeMapped);
+		List<BeerDto> beerListToReturn = microbrewController.returnListOfBeer(null);
 		assertNotNull(beerListToReturn);
 	}
 	
@@ -83,9 +83,9 @@ public class MicrobrewControllerTest {
 		beerOne.setAbv(1.2F);
 		beerListToBeMapped.add(beerOne);
 		List<BeerDto> expectedBeerDtoList = beerListToBeMapped.stream().map(record -> beerDtoMapper.beerToBeerDto(record)).collect(Collectors.toList());
-		when(mockBeerService.returnAllMicrobrews()).thenReturn(beerListToBeMapped);		
+		when(mockBeerService.returnAllMicrobrews(null)).thenReturn(beerListToBeMapped);		
 		when(mockBeerDtoMapper.beerToBeerDto(beerOne)).thenReturn(beerDtoMapper.beerToBeerDto(beerOne));
-		List<BeerDto> actualBeerDtoList = microbrewController.returnListOfBeer();
+		List<BeerDto> actualBeerDtoList = microbrewController.returnListOfBeer(null);
 		assertNotNull(actualBeerDtoList);
 		assertTrue(CollectionUtils.isEqualCollection(expectedBeerDtoList, actualBeerDtoList));
 	}
@@ -96,7 +96,7 @@ public class MicrobrewControllerTest {
 		BeerDto beerDtoToInsert = new BeerDto();
 		beerDtoToInsert.setAbv("1.2");
 		beerDtoToInsert.setBeerName("BeerOne");
-		when(mockBeerService.returnAllMicrobrews()).thenReturn(beerListToBeMapped);	
+		when(mockBeerService.returnAllMicrobrews(null)).thenReturn(beerListToBeMapped);	
 		microbrewController.insertBrewRecord(beerDtoToInsert);
 		verify(mockBeerService, times(1)).insertBrew(beerDtoToInsert);
 	}

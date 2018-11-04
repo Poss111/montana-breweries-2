@@ -18,6 +18,8 @@ import com.montanabrews.entities.Brewery;
 import com.montanabrews.repositories.BeerRepository;
 import com.montanabrews.repositories.BeerTypeRepository;
 import com.montanabrews.repositories.BreweryRepository;
+import com.montanabrews.specifications.impl.BeerSpecification;
+import com.montanabrews.util.SearchCriteria;
 
 @Repository
 @Transactional
@@ -35,9 +37,13 @@ public class BeerDaoImpl implements BeerDao {
 	private BeerTypeRepository beerTypeRepository;
 	
 	@Override
-	public List<Beer> retrieveListOfBeers() {
-//		setClassy(Beer.class);
-//		return findAll();
+	public List<Beer> retrieveListOfBeers(SearchCriteria searchCriteria) {		
+		if (searchCriteria != null) {
+			LOG.info("Creating a Beer Specification out of given SearchCriteria ('{}')", searchCriteria);
+			BeerSpecification beerSpecification = new BeerSpecification(searchCriteria);
+			return beerRepository.findAll(beerSpecification);
+		}
+		LOG.info("Querying for all available Beer records...");
 		return beerRepository.findAll();
 	}
 

@@ -12,6 +12,7 @@ import com.montanabrews.dtos.BeerDto;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.services.BeerService;
 import com.montanabrews.util.BeerDtoMapper;
+import com.montanabrews.util.SearchCriteria;
 
 @Component
 public class BeerServiceImpl implements BeerService {
@@ -25,8 +26,8 @@ public class BeerServiceImpl implements BeerService {
 	private BeerDtoMapper beerMapper;
 	
 	@Override
-	public List<Beer> returnAllMicrobrews() {
-		return beerDao.retrieveListOfBeers();
+	public List<Beer> returnAllMicrobrews(SearchCriteria searchCriteria) {
+		return beerDao.retrieveListOfBeers(searchCriteria);
 	}
 
 	@Override

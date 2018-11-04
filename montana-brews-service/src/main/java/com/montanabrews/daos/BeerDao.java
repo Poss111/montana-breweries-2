@@ -3,6 +3,7 @@ package com.montanabrews.daos;
 import java.util.List;
 
 import com.montanabrews.entities.Beer;
+import com.montanabrews.util.SearchCriteria;
 
 /**
  * @author Dan Poss This Dao class will handle the persistence Layer for the
@@ -13,10 +14,11 @@ public interface BeerDao {
 	/**
 	 * This method will be used to retrieve all Beer records from the persistence
 	 * Layer. - Daniel
+	 * @param searchCriteria TODO
 	 * 
 	 * @return a List of Beer records
 	 */
-	public List<Beer> retrieveListOfBeers();
+	public List<Beer> retrieveListOfBeers(SearchCriteria searchCriteria);
 
 	/**
 	 * This method is used to insert a Beer record into the persistence Layer
