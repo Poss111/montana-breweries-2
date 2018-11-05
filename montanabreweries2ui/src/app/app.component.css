@@ -13,3 +13,8 @@
     border-radius: 20px;
     box-shadow: 5px 0 #e8e4e4;
 }
+
+.filterHeader {
+    display: flex;
+    width: 100%;
+}

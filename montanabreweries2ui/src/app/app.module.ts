@@ -13,17 +13,23 @@ import { WebsocketService } from './services/websocket.service';
 import { StompService, StompConfig } from '@stomp/ng2-stompjs';
 import { stompConfig } from './constants/stomp-config.module';
 import { BeerTileComponent } from './components/beer-tile/beer-tile.component';
+import { FiltersComponent } from './components/filters/filters.component';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
     AppComponent,
     BreweriesGridComponent,
-    BeerTileComponent
+    BeerTileComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
     TableModule,
-    HttpClientModule
+    HttpClientModule,
+    ButtonModule,
+    InputTextModule
   ],
   providers: [MicrobrewService, BreweriesService, Configuration, WebsocketService, StompService, { provide: StompConfig, useValue: stompConfig}],
   bootstrap: [AppComponent]
