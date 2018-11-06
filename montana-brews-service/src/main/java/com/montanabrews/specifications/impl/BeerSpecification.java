@@ -26,13 +26,13 @@ public class BeerSpecification implements Specification<Beer> {
 
 	@Override
 	public Predicate toPredicate(Root<Beer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-		return buildCriteriaForBeer(root, searchCriteria, criteriaBuilder);
+		return buildCriteria(root, searchCriteria, criteriaBuilder);
 	}
 	
-	public Predicate buildCriteriaForBeer(Path<?> path, SearchCriteria searchCriteria, CriteriaBuilder criteriaBuilder) {		
+	public Predicate buildCriteria(Path<?> path, SearchCriteria searchCriteria, CriteriaBuilder criteriaBuilder) {		
 		if (searchCriteria.getOperation().equalsIgnoreCase("^")) {
 			LOG.info("recursive function hit, reaching further");
-			return buildCriteriaForBeer(path.get(searchCriteria.getKey()), searchCriteria.getSearchCriteria(), criteriaBuilder);
+			return buildCriteria(path.get(searchCriteria.getKey()), searchCriteria.getSearchCriteria(), criteriaBuilder);
 		} switch(searchCriteria.getOperation().trim()) {
 			case "<":
 				LOG.info("Filtering by <");
