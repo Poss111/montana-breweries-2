@@ -13,6 +13,10 @@ import org.springframework.data.jpa.domain.Specification;
 import com.montanabrews.entities.Beer;
 import com.montanabrews.util.SearchCriteria;
 
+/**
+ * @author Daniel Poss
+ *
+ */
 public class BeerSpecification implements Specification<Beer> {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(BeerSpecification.class);
@@ -29,6 +33,13 @@ public class BeerSpecification implements Specification<Beer> {
 		return buildCriteria(root, searchCriteria, criteriaBuilder);
 	}
 	
+	/**
+	 * This method will recursive call itself until it reaches the Search Criteria Object that contains the actual filtering to be met. - Daniel
+	 * @param path - The object to be sued to navigate through and pull the property to be compared with.
+	 * @param searchCriteria - the filtering criteria to be used for retrieving Beer objects.
+	 * @param criteriaBuilder - The resulting CriteriaBuilder from the comparison SearchCriteria.
+	 * @return Predicate to be used for filtering Beer results.
+	 */
 	public Predicate buildCriteria(Path<?> path, SearchCriteria searchCriteria, CriteriaBuilder criteriaBuilder) {		
 		if (searchCriteria.getOperation().equalsIgnoreCase("^")) {
 			LOG.info("recursive function hit, reaching further");
