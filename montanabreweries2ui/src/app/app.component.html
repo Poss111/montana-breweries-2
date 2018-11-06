@@ -4,10 +4,11 @@
       <p class="title">A Brew for You</p>
     </div>
     <div class="filterHeader">
-      <filters></filters>
-      <filters></filters>
-      <filters></filters>
-      <p-button label="Filter"></p-button>
+      <filters filterName="beerName" filterOperation=":"></filters>
+      <filters filterName="abv" filterOperation=">"placeholderValue="d.dd"></filters>
+      <filters filterName="beerType" filterOperation="^"></filters>
+      <p-button label="Filter" (click)="submitFilters()"></p-button>
+      <span>{{text}}</span>
     </div>
     <div>
       <p-table [value]="microbrews">

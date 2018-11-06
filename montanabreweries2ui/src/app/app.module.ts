@@ -16,6 +16,8 @@ import { BeerTileComponent } from './components/beer-tile/beer-tile.component';
 import { FiltersComponent } from './components/filters/filters.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { FilterService } from './services/filter.service';
 
 @NgModule({
   declarations: [
@@ -29,9 +31,10 @@ import { InputTextModule } from 'primeng/inputtext';
     TableModule,
     HttpClientModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    FormsModule
   ],
-  providers: [MicrobrewService, BreweriesService, Configuration, WebsocketService, StompService, { provide: StompConfig, useValue: stompConfig}],
+  providers: [MicrobrewService, BreweriesService, FilterService, Configuration, WebsocketService, StompService, { provide: StompConfig, useValue: stompConfig}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
