@@ -1,0 +1,13 @@
+filterContainer {
+  position: absolute;
+  width: 75%;
+}
+
+filterContainer > app-breweries-filter {
+  width: 32%;
+}
+
+app-breweries-filter {
+  display: inline-block;
+  width: 25%;
+}

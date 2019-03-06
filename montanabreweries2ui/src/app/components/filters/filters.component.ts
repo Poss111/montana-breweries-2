@@ -8,27 +8,23 @@ import { FilterMap } from 'src/app/filter';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
+  @Input('placeholderValue') placeholderText: String;
+  @Input('filterName') filterName: String;
+  @Input('filterOperation') filterOperation: String;
 
-  @Input('placeholderValue') placeholderText : String;
-  @Input('filterName') filterName : String;
-  @Input('filterOperation') filterOperation : String;
-
-  filterMap : FilterMap;
-  textValue : string;
+  filterMap: FilterMap;
+  textValue: string;
 
   constructor(private filterService: FilterService) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   submitFilter() {
-    if (this.textValue != null && this.textValue != "") {
-      this.filterMap = new FilterMap;
+    if (this.textValue != null && this.textValue != '') {
+      this.filterMap = new FilterMap();
       this.filterMap.name = this.filterName;
       this.filterMap.operation = this.filterOperation;
       this.filterMap.value = this.textValue;
     }
   }
-
 }

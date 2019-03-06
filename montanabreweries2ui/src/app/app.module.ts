@@ -18,13 +18,19 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from './services/filter.service';
+import { BreweriesFiltersComponent } from './breweries-grid/breweries-filters/breweries-filters.component';
+import { BreweriesContainerComponent } from './breweries-grid/breweries-container/breweries-container.component';
+import { BreweriesFilterComponent } from './breweries-grid/breweries-filter/breweries-filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BreweriesGridComponent,
     BeerTileComponent,
-    FiltersComponent
+    FiltersComponent,
+    BreweriesFiltersComponent,
+    BreweriesContainerComponent,
+    BreweriesFilterComponent
   ],
   imports: [
     BrowserModule,

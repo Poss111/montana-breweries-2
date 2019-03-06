@@ -3,31 +3,35 @@
     <div class="header">
       <p class="title">A Brew for You</p>
     </div>
-    <div class="filterHeader">
+    <!-- <div class="filterHeader">
       <filters filterName="beerName" filterOperation=":"></filters>
-      <filters filterName="abv" filterOperation=">"placeholderValue="d.dd"></filters>
+      <filters
+        filterName="abv"
+        filterOperation=">"
+        placeholderValue="d.dd"
+      ></filters>
       <filters filterName="beerType" filterOperation="^"></filters>
       <p-button label="Filter" (click)="submitFilters()"></p-button>
-      <span>{{text}}</span>
-    </div>
+    </div> -->
+    <app-breweries-container></app-breweries-container>
     <div>
       <p-table [value]="microbrews">
         <ng-template pTemplate="header">
           <tr>
-              <th>Name</th>
-              <th>ABV (%)</th>
-              <th>Beer Type</th>
-              <th>Rating</th>
-              <th>Brewery</th>
+            <th>Name</th>
+            <th>ABV (%)</th>
+            <th>Beer Type</th>
+            <th>Rating</th>
+            <th>Brewery</th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-microbrew>
           <tr>
-              <td>{{microbrew.beerName}}</td>
-              <td>{{microbrew.abv}}</td>
-              <td>{{microbrew.beerType}}</td>
-              <td>{{microbrew.rating}}</td>
-              <td>{{microbrew.brewery}}</td>
+            <td>{{ microbrew.beerName }}</td>
+            <td>{{ microbrew.abv }}</td>
+            <td>{{ microbrew.beerType }}</td>
+            <td>{{ microbrew.rating }}</td>
+            <td>{{ microbrew.brewery }}</td>
           </tr>
         </ng-template>
       </p-table>
