@@ -1,23 +1,23 @@
 <div id="filter-box" class="filterContainer">
   <app-breweries-filter
     filterName="Beer Name"
-    (textInput)="onEvent($event)"
+    (textInput)="onEventMyOwn($event)"
   ></app-breweries-filter>
   <app-breweries-filter
     filterName="ABV %"
-    (textInput)="onEvent($event)"
+    (textInput)="onEventMyOwn($event)"
   ></app-breweries-filter>
   <app-breweries-filter
     filterName="Beer Type"
-    (textInput)="onEvent($event)"
+    (textInput)="onEventMyOwn($event)"
   ></app-breweries-filter>
   <app-breweries-filter
     filterName="Rating"
-    (textInput)="onEvent($event)"
+    (textInput)="onEventMyOwn($event)"
   ></app-breweries-filter>
   <app-breweries-filter
     filterName="Brewery"
-    (textInput)="onEvent($event)"
+    (textInput)="onEventMyOwn($event)"
   ></app-breweries-filter>
   {{ filterValue }}
 </div>

@@ -12,8 +12,7 @@ export class BreweriesFiltersComponent implements OnInit {
 
   ngOnInit() {}
 
-  onEvent(event: any) {
+  onEventMyOwn(event: any) {
     this.filterValue = event.valueTyped;
-    console.log('From the parent: ' + this.filterValue);
   }
 }

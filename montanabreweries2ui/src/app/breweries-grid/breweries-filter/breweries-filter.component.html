@@ -2,6 +2,7 @@
   <input
     type="text"
     placeholder="{{ filterName }}"
-    (keydown)="onChangeEvent($event.target.value)"
+    #filterValue
+    (keyup)="onChangeEvent(filterValue.value)"
   />
 </div>
