@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./breweries-filters.component.css']
 })
 export class BreweriesFiltersComponent implements OnInit {
+  filterValue: string;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onEvent(event: any) {
+    this.filterValue = event.valueTyped;
+    console.log('From the parent: ' + this.filterValue);
   }
-
 }
