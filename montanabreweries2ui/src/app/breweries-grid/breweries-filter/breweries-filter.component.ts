@@ -18,6 +18,6 @@ export class BreweriesFilterComponent implements OnInit {
 
   onChangeEvent(event) {
     console.log('Change is occuring! ' + event);
-    this.textInput.emit({ valueTyped: event });
+    this.textInput.emit({ filterNme: this.filterName, valueTyped: event });
   }
 }

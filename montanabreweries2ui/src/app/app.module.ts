@@ -40,7 +40,15 @@ import { BreweriesFilterComponent } from './breweries-grid/breweries-filter/brew
     InputTextModule,
     FormsModule
   ],
-  providers: [MicrobrewService, BreweriesService, FilterService, Configuration, WebsocketService, StompService, { provide: StompConfig, useValue: stompConfig}],
+  providers: [
+    MicrobrewService,
+    BreweriesService,
+    FilterService,
+    Configuration,
+    WebsocketService,
+    StompService,
+    { provide: StompConfig, useValue: stompConfig }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

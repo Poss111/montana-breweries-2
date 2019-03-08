@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Filter } from '../shared/filter';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-breweries-filters',
@@ -7,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreweriesFiltersComponent implements OnInit {
   filterValue: string;
-
+  filter: Map<string, string>;
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.filter = new Map();
+  }
 
   onEventMyOwn(event: any) {
-    this.filterValue = event.valueTyped;
+    this.filter.set(event.filterNme, event.valueTyped);
+    console.log(this.filter);
   }
 }
