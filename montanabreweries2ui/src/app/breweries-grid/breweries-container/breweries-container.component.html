@@ -1,1 +1,23 @@
 <app-breweries-filters></app-breweries-filters>
+<div>
+  <p-table [value]="microbrews">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Name</th>
+        <th>ABV (%)</th>
+        <th>Beer Type</th>
+        <th>Rating</th>
+        <th>Brewery</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-microbrew>
+      <tr>
+        <td>{{ microbrew.beerName }}</td>
+        <td>{{ microbrew.abv }}</td>
+        <td>{{ microbrew.beerType }}</td>
+        <td>{{ microbrew.rating }}</td>
+        <td>{{ microbrew.brewery }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

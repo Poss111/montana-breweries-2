@@ -5,7 +5,7 @@ import { StompService, StompState } from '@stomp/ng2-stompjs';
 import { map } from 'rxjs/operators';
 import { WebSocketConfig } from '../websocket.config';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class WebsocketService {
   public message: Observable<Message>;
 
