@@ -1,20 +1,25 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Observable, of } from 'rxjs';
+import {Observable} from 'rxjs';
 
-import { Microbrew } from '../microbrew';
-import { MICROBREWS } from '../mock-microbrews';
-import {
-  HttpClient,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-  HttpHeaders
-} from '@angular/common/http';
-import { Configuration } from '../app.constants';
+import {Microbrew} from '../microbrew';
+import {HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Configuration} from '../app.constants';
 
 @Injectable({ providedIn: 'root' })
+export class CustomInterceptor implements HttpInterceptor {
+  intercept(
+      req: HttpRequest<any>,
+      next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    console.log("Using custom interceptor...");
+
+    req = req.clone({headers: req.headers.set('Content-Type', 'application/json')});
+    return next.handle(req);
+  }
+}
+
+@Injectable({providedIn: 'root'})
 export class MicrobrewService {
   private microbrewsUrl = 'microbrewlist';
   private actionUrl: string;
@@ -24,23 +29,9 @@ export class MicrobrewService {
   }
 
   public getMicrobrews(): Observable<Microbrew[]> {
+    // console.log("Making call...");
+    // const headers = new HttpHeaders()
+    //     .set('Content-Type', 'application/json');
     return this.http.post<Microbrew[]>(this.actionUrl, '');
-  }
-}
-
-@Injectable({ providedIn: 'root' })
-export class CustomInterceptor implements HttpInterceptor {
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    if (!req.headers.has('Content-type')) {
-      req = req.clone({
-        headers: req.headers.set('Content-Type', 'application/json')
-      });
-    }
-
-    req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
-    return next.handle(req);
   }
 }

@@ -1,19 +1,17 @@
-import { Component, OnInit, ViewChildren } from '@angular/core';
-import { Microbrew } from 'src/app/microbrew';
-import { FilterMap } from 'src/app/filter';
-import { MicrobrewService } from 'src/app/services/microbrews.service';
-import { WebsocketService } from 'src/app/services/websocket.service';
-import { FilterService } from 'src/app/services/filter.service';
-import { FiltersComponent } from 'src/app/components/filters/filters.component';
-import { Subscription } from 'rxjs';
-import { Message } from '@stomp/stompjs';
+import {Component, OnDestroy, OnInit, ViewChildren} from '@angular/core';
+import {Microbrew} from 'src/app/microbrew';
+import {MicrobrewService} from 'src/app/services/microbrews.service';
+import {WebsocketService} from 'src/app/services/websocket.service';
+import {FiltersComponent} from 'src/app/components/filters/filters.component';
+import {Subscription} from 'rxjs';
+import {Message} from '@stomp/stompjs';
 
 @Component({
   selector: 'app-breweries-container',
   templateUrl: './breweries-container.component.html',
   styleUrls: ['./breweries-container.component.css']
 })
-export class BreweriesContainerComponent implements OnInit {
+export class BreweriesContainerComponent implements OnInit, OnDestroy {
   title = 'montanabreweries2ui';
 
   @ViewChildren(FiltersComponent)
@@ -25,27 +23,29 @@ export class BreweriesContainerComponent implements OnInit {
 
   microbrews: Microbrew[];
 
-  filterMaps: FilterMap[] = [];
-
   constructor(
-    private microbrewService: MicrobrewService,
-    private websocketService: WebsocketService,
-    private filterService: FilterService
+      private microbrewService: MicrobrewService,
+      private websocketService: WebsocketService
   ) {}
 
   ngOnInit() {
-    this.getMicrobrews();
+    // this.getMicrobrews();
     this.websocketService.connectWebSocket();
     this.datasubscription = this.websocketService
       .getSocketDataObservable()
-      .subscribe(this.onData);
+        .subscribe((message: Message) => {
+          console.log('Data received ', message.body);
+          this.microbrews = JSON.parse(message.body);
+        });
     this.statesubscription = this.websocketService
       .getSocketStateObservable()
-      .subscribe(this.onStateChange);
-    this.filterService.getFilter().subscribe(filtering => {
-      this.filterMaps.push(filtering);
-    });
-    // this.getMicrobrews();
+        .subscribe((state: String) => {
+          console.log('The Websocket connection state has changed ::', state);
+          if ('CONNECTED' === state) {
+            console.log('We are connected, querying for Data...');
+            this.getMicrobrews();
+          }
+        });
   }
 
   getMicrobrews(): void {
@@ -54,14 +54,6 @@ export class BreweriesContainerComponent implements OnInit {
       .getMicrobrews()
       .subscribe(microbrews => (this.microbrews = microbrews));
   }
-
-  private onData = (message: Message) => {
-    this.microbrews = JSON.parse(message.body);
-  };
-
-  private onStateChange = (state: String) => {
-    console.log('WS connection State has changed :: ' + state);
-  };
 
   submitFilters() {
     this.filtersComponent.forEach(function(filterComponent) {
