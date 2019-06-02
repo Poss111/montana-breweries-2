@@ -32,16 +32,20 @@
         </rollingPolicy>
     </appender>
      
-    <!-- LOG everything at INFO level -->
-    <root level="info">
+    <!-- LOG everything at ERROR level -->
+    <root level="error">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </root>
  
     <!-- LOG "com.montanabrews*" at TRACE level -->
-    <logger name="com.montanabrews" level="info" additivity="false">
+    <logger name="com.montanabrews" level="error" additivity="false">
         <appender-ref ref="RollingFile" />
         <appender-ref ref="Console" />
     </logger>
  
+     <logger name="org.hibernate" level="error" additivity="false">
+        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
+    </logger>
 </configuration>
